@@ -8,6 +8,9 @@ import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import Dashboard from '../../views/Dashboard/';
 import Charts from '../../views/Charts/';
+import Machines from '../../views/Machines/';
+import Machine_Details from '../../views/Machine_Details/';
+import Mqtt_Test from '../../views/Mqtt_Test/';
 
 class Full extends Component {
   render() {
@@ -22,11 +25,14 @@ class Full extends Component {
               <Switch>           
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                 <Route path="/charts" name="Charts" component={Charts}/>
+                <Route path="/machines" name="Machines" component={Machines}/>
+                <Route path="/machine_details" name="Machines_Details" component={Machine_Details}/>
+                <Route path="/mqtt_test" name="MQTT_Test" component={Mqtt_Test}/>
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
             </Container>
           </main>
-          <Aside />
+          <Aside/>
         </div>
         <Footer />
       </div>
