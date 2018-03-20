@@ -10,7 +10,9 @@ class Mqtt_Test extends Component {
     var client = mqtt.connect(host);
     
     client.on('connect', function() {
-        client.subscribe("production_line/#");
+      console.log("Client Connected..!");
+      client.subscribe("production_line/#");
+      console.log("Subscribed Success..!");
     });
     var subscribed_data;
     client.on('message', function(topic, payload, packet) {

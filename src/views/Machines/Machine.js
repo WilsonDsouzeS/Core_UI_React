@@ -16,7 +16,56 @@ import {
 } from 'reactstrap';
 
 class Machines extends Component {
-
+  constructor() {
+    super();
+    this.state = {
+       data: 
+       [
+          {
+             "m_id":"Machine-001",
+             "operation":"Bush Assembly",
+             "status":"Running",
+             "accepted_target":"300",
+             "quality_target":"350"
+          },
+          {
+            "m_id":"Machine-002",
+            "operation":"Bearing Assembly",
+            "status":"Running",
+            "accepted_target":"300",
+            "quality_target":"350"
+          },
+          {
+            "m_id":"Machine-003",
+            "operation":"Dowel Assembly",
+            "status":"Disturbance Over Change",
+            "accepted_target":"300",
+            "quality_target":"350"
+          },
+          {
+            "m_id":"Machine-004",
+            "operation":"Screw Assembly",
+            "status":"Disturbance Not Coded",
+            "accepted_target":"300",
+            "quality_target":"350"
+          },
+          {
+            "m_id":"Machine-005",
+            "operation":"O-Ring Assembly",
+            "status":"Running",
+            "accepted_target":"300",
+            "quality_target":"350"
+          },
+          {
+            "m_id":"Machine-006",
+            "operation":"EOLT",
+            "status":"Not Running",
+            "accepted_target":"300",
+            "quality_target":"350"
+          }
+       ]
+    }
+ }
   render() {
     return (
       <div className="animated fadeIn">
@@ -38,108 +87,9 @@ class Machines extends Component {
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td><Link to="/machine_details">Machine-001</Link></td>
-                    <td>Bush Assembly</td>
-                    <td>
-                      <Badge color="success">Running</Badge>
-                    </td>
-                    <td>330</td>
-                    <td>350</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-002</td>
-                    <td>Bearing Assembly</td>
-                    <td>
-                      <Badge color="success">Running</Badge>
-                    </td>
-                    <td>300</td>
-                    <td>320</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-003</td>
-                    <td>Dowel Assembly</td>
-                    <td>
-                      <Badge color="info">Disturbance Over Change</Badge>
-                    </td>
-                    <td>250</td>
-                    <td>350</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-004</td>
-                    <td>Screw Assembly</td>
-                    <td>
-                      <Badge color="danger">Disturbance Not Coded</Badge>
-                    </td>
-                    <td>150</td>
-                    <td>300</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-005</td>
-                    <td>O-Ring Assembly</td>
-                    <td>
-                      <Badge color="success">Running</Badge>
-                    </td>
-                    <td>330</td>
-                    <td>350</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-006</td>
-                    <td>EOLT</td>
-                    <td>
-                      <Badge color="secondary">Not Running</Badge>
-                    </td>
-                    <td>0</td>
-                    <td>400</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-007</td>
-                    <td>Bush Assembly</td>
-                    <td>
-                      <Badge color="success">Running</Badge>
-                    </td>
-                    <td>330</td>
-                    <td>350</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-008</td>
-                    <td>Dowel Assembly</td>
-                    <td>
-                      <Badge color="info">Disturbance Over Change</Badge>
-                    </td>
-                    <td>330</td>
-                    <td>350</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-009</td>
-                    <td>Bush Assembly</td>
-                    <td>
-                      <Badge color="success">Running</Badge>
-                    </td>
-                    <td>330</td>
-                    <td>350</td>
-                  </tr>
-                  <tr>
-                    <td>Machine-010</td>
-                    <td>EOLT</td>
-                    <td>
-                      <Badge color="danger">Disturbance Not Coded</Badge>
-                    </td>
-                    <td>200</td>
-                    <td>350</td>
-                  </tr>
-                  </tbody>
+                  {this.state.data.map((data, i) => <TableRow key = {i} data = {data} />)}
+                 </tbody>
                 </Table>
-                {/* <Pagination>
-                  <PaginationItem disabled><PaginationLink previous href="#">Prev</PaginationLink></PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem><PaginationLink href="#">2</PaginationLink></PaginationItem>
-                  <PaginationItem><PaginationLink href="#">3</PaginationLink></PaginationItem>
-                  <PaginationItem><PaginationLink href="#">4</PaginationLink></PaginationItem>
-                  <PaginationItem><PaginationLink next href="#">Next</PaginationLink></PaginationItem>
-                </Pagination> */}
               </CardBody>
             </Card>
           </Col>
@@ -148,5 +98,58 @@ class Machines extends Component {
     )
   }
 }
+var mqtt = require('mqtt');
+var host = 'ws://192.168.20.144:9093/mqtt';
+var client = mqtt.connect(host);
 
+client.on('connect', function() {
+    client.subscribe("production_line");
+});
+var subscribed_data; 
+class TableRow extends React.Component {
+  render() {
+    var each_data=this.props.data;  
+    var myStyle;    
+    client.on('message', function(topic, payload, packet) {
+      if(topic=="production_line")
+      {
+      subscribed_data= JSON.parse(payload.toString());  
+      }
+      var Mac_Id = document.getElementById(each_data.m_id).innerHTML;
+      var Status_Val = document.getElementById(each_data.operation);
+      if(Mac_Id==subscribed_data.m_id)
+      {
+        console.log(subscribed_data);
+        Status_Val.innerHTML="";
+        Status_Val.innerHTML=subscribed_data.operation;
+        myStyle="secondary";
+      }
+    }); 
+    if(this.props.data.status=="Running")
+    {
+      myStyle="success";
+    }
+    else if(this.props.data.status=="Disturbance Over Change")
+    {
+      myStyle="info";
+    }
+    else if(this.props.data.status=="Disturbance Not Coded")
+    {
+      myStyle="danger";
+    }
+    else if(this.props.data.status=="Not Running")
+    {
+      myStyle="secondary";
+    }
+     return (     
+        <tr>
+          <td ><Link to="/machine_details"><span id={each_data.m_id}>{each_data.m_id}</span></Link></td>
+          <td><span id={each_data.operation}>{each_data.operation}</span></td>
+          <td ><Badge color={myStyle}>{each_data.status}</Badge></td>
+          <td>{each_data.accepted_target}</td>
+          <td>{each_data.quality_target}</td>
+        </tr>
+     );
+  }
+}
 export default Machines;
