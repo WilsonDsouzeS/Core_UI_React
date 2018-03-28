@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter, Route, Switch} from 'react-router-dom';
-
+import Auth from './Auth/Auth.js';
 // Styles
 // Import Flag Icons Set
 import 'flag-icon-css/css/flag-icon.min.css';
@@ -16,7 +16,13 @@ import '../scss/core/_dropdown-menu-right.scss'
 
 // Containers
 import Full from './containers/Full/'
-
+const auth=new Auth();
+console.log(auth.isAuthenticated());
+if(auth.isAuthenticated()!=true)
+{
+    auth.login();
+    auth.handleAuthentication();
+}
 ReactDOM.render((
   <HashRouter>
     <Switch>

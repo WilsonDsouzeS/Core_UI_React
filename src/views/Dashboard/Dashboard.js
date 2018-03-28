@@ -83,8 +83,20 @@ const cardChartOpts1 = {
 }
 
 class Dashboard extends Component {
-
   render() {
+    localStorage.removeItem("Machine_Id");
+    localStorage.removeItem("Status");        
+    localStorage.removeItem("Current_Unit");
+    localStorage.removeItem("Quality_Target"); 
+    localStorage.removeItem("Product");
+    localStorage.removeItem("Station");
+    localStorage.removeItem("Shift"); 
+    localStorage.removeItem("Part_No");
+    localStorage.removeItem("Order_No");
+    localStorage.removeItem("Available_Time");
+    localStorage.removeItem("Running_Time"); 
+    localStorage.removeItem("Good_Parts");
+    localStorage.removeItem("Rejected_Parts");
     return (
       <div className="animated fadeIn">
         <Row>
@@ -92,7 +104,7 @@ class Dashboard extends Component {
           <Link to="/machines">
             <Card className="text-white bg-danger">
               <CardBody className="pb-0">
-                <h4 className="mb-0">10</h4>
+                <h4 className="mb-0">6</h4>
                 <p>Total Machines</p>
               </CardBody>
               <div className="chart-wrapper px-3" style={{height:'70px'}}>

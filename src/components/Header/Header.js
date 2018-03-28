@@ -4,7 +4,11 @@ import {
   NavItem,
   NavbarToggler,
   NavbarBrand,
+  Button
 } from 'reactstrap';
+import Auth from '../../Auth/Auth';
+
+const auth=new Auth();
 
 class Header extends Component {
 
@@ -27,7 +31,7 @@ class Header extends Component {
     e.preventDefault();
     document.body.classList.toggle('aside-menu-hidden');
   } */
-
+  
   render() {
     return (
       <header className="app-header navbar">
@@ -38,9 +42,7 @@ class Header extends Component {
         <NavbarToggler className="d-md-down-none mr-auto" onClick={this.sidebarToggle}>
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
-        {/* <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
-          <span className="navbar-toggler-icon"></span>
-        </NavbarToggler> */}
+        <Button outline color="primary" size="sm" onClick={auth.logout}>LogOut</Button>
       </header>
     );
   }
