@@ -99,7 +99,7 @@ class Machine_Details extends Component {
     var Running_Time = localStorage.getItem("Running_Time");
     var Good_Parts = localStorage.getItem("Good_Parts");
     var Rejected_Parts = localStorage.getItem("Rejected_Parts");
-    var Production_Capacity = localStorage.getItem("Production_Capacity");    
+    var Production_Capacity = localStorage.getItem("Production_Capacity");
     var Is_Machine_Id = false;
     /* if(Machine_Id==null)
     {Is_Machine_Id=true;}
@@ -147,28 +147,17 @@ class Machine_Details extends Component {
                       </tbody>
                     </Table>
                   </Col>
-                  <Col xs="12" lg="2">
+                  <Col xs="12" lg="4">
                     <div className="chart-wrapper">
                       <Doughnut data={availability} />
                     </div>
                   </Col>
-                  <Col xs="12" lg="2">
+                  <Col xs="12" lg="4">
                     <div className="chart-wrapper">
                       <Doughnut data={quality} />
                     </div>
                   </Col>
-                  <Col xs="12" lg="2">
-                    <div className="chart-wrapper">
-                      <Doughnut data={performance} />
-                    </div>
-                  </Col>
-                  <Col xs="12" lg="2">
-                    <div className="chart-wrapper">
-                      <Doughnut data={oee} />
-                    </div>
-                  </Col>
                 </Row>
-                <hr />
                 <Row>
                   <Col xs="12" lg="2">
                     <CardBody>
@@ -184,7 +173,20 @@ class Machine_Details extends Component {
                       <Button outline color="primary" size="lg">&nbsp;Actual Production &nbsp;<br />{Target_Unit} Units/Shift </Button>
                     </CardBody>
                   </Col>
-                  <Col xs="12" sm="2" className="text-center">
+                  <Col xs="12" lg="4">
+                    <div className="chart-wrapper">
+                      <Doughnut data={performance} />
+                    </div>
+                  </Col>
+                  <Col xs="12" lg="4">
+                    <div className="chart-wrapper">
+                      <Doughnut data={oee} />
+                    </div>
+                  </Col>
+                </Row>
+                <hr />
+                <Row>
+                  <Col xs="12" sm="3" className="text-center">
                     <CardBody>
                       <Button outline color="primary" size="lg">Available Time<br />{Available_Time}</Button>
                     </CardBody>
@@ -192,7 +194,7 @@ class Machine_Details extends Component {
                       <Button outline color="primary" size="lg">Running Time <br /> {Running_Time}</Button>
                     </CardBody>
                   </Col>
-                  <Col xs="12" sm="2" className="text-center">
+                  <Col xs="12" sm="3" className="text-center">
                     <CardBody>
                       <Button outline color="primary" size="lg">Goal <br /> {Target_Unit} Units Shift</Button>
                     </CardBody>
@@ -200,7 +202,7 @@ class Machine_Details extends Component {
                       <Button outline color="primary" size="lg">Produced Unit <br /> {Current_Unit} Units</Button>
                     </CardBody>
                   </Col>
-                  <Col xs="12" sm="2" className="text-center">
+                  <Col xs="12" sm="3" className="text-center">
                     <CardBody>
                       <Button outline color="primary" size="lg">Good Parts <br /> {Good_Parts} Units Shift</Button>
                     </CardBody>
@@ -208,7 +210,7 @@ class Machine_Details extends Component {
                       <Button outline color="primary" size="lg">Rejected Parts <br /> {Rejected_Parts}</Button>
                     </CardBody>
                   </Col>
-                  <Col xs="12" sm="2" className="text-center">
+                  <Col xs="12" sm="3" className="text-center">
                     <CardBody>
                       <Link to="/trend_chart">
                         <Button outline color="primary" size="lg">Trend Chart <br /> <i className="fa fa-line-chart fa-lg fa-2x"></i></Button>
