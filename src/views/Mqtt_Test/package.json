@@ -1,6 +1,0 @@
-{
-  "name": "Mqtt_Test",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./mqtt_test.js"
-}
