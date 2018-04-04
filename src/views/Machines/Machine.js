@@ -155,11 +155,10 @@ class Machines extends Component {
 var mqtt = require('mqtt');
 var host = 'ws://192.168.20.144:9093/mqtt';
 var client = mqtt.connect(host);
-
+var subscribed_data;
 client.on('connect', function () {
   client.subscribe("production_line");
 });
-var subscribed_data;
 class TableRow extends React.Component {
   handleClick(mac_details, e) {
     localStorage.setItem("Machine_Id",mac_details.m_id);
@@ -175,7 +174,8 @@ class TableRow extends React.Component {
     localStorage.setItem("Running_Time",mac_details.running_time);
     localStorage.setItem("Good_Parts",mac_details.good_parts);
     localStorage.setItem("Rejected_Parts",mac_details.rejected_parts);   
-    localStorage.setItem("Production_Capacity",mac_details.production_capacity);       
+    localStorage.setItem("Production_Capacity",mac_details.production_capacity);  
+    client.unsubscribe("production_line");     
   }
   render() {
     localStorage.removeItem("Machine_Id");
@@ -200,30 +200,21 @@ class TableRow extends React.Component {
         subscribed_data = JSON.parse(payload.toString());
       }
       var Mac_Id = document.getElementById(each_data.m_id).innerHTML;
-      var Status_Val = document.getElementById(each_data.operation);
+      var Operation_Val = document.getElementById(each_data.operation);
+      var Status_Val = document.getElementById(each_data.status);      
       if (Mac_Id == subscribed_data.m_id) {
         console.log(subscribed_data);
+        Operation_Val.innerHTML = "";
+        Operation_Val.innerHTML = subscribed_data.operation;
         Status_Val.innerHTML = "";
-        Status_Val.innerHTML = subscribed_data.operation;
+        Status_Val.innerHTML = subscribed_data.status;
       }
     });
-    if (this.props.data.status == "Running") {
-      myStyle = "success";
-    }
-    else if (this.props.data.status == "Disturbance Over Change") {
-      myStyle = "info";
-    }
-    else if (this.props.data.status == "Disturbance Not Coded") {
-      myStyle = "danger";
-    }
-    else if (this.props.data.status == "Not Running") {
-      myStyle = "secondary";
-    }
-    return (
+  return (
       <tr>
         <td ><Link to="/machine_details"><span id={each_data.m_id} onClick={this.handleClick.bind(this, each_data)}>{each_data.m_id}</span></Link></td>
         <td><span id={each_data.operation}>{each_data.operation}</span></td>
-        <td ><Badge color={myStyle}>{each_data.status}</Badge></td>
+        <td ><span id={each_data.status}>{each_data.status}</span></td>
         <td>{each_data.current_unit}</td>
         <td>{each_data.quality_target}</td>
       </tr>

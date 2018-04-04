@@ -33,10 +33,10 @@ const brandDanger = '#f86c6b';
 
 // Card Chart 1
 const cardChartData1 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ['Mac-001', 'Mac-002', 'Mac-003', 'Mac-004', 'Mac-005', 'Mac-006', 'Mac-007'],
   datasets: [
     {
-      label: 'My First dataset',
+      label: 'My Machines',
       backgroundColor: brandDanger,
       borderColor: 'rgba(255,255,255,.55)',
       data: [65, 59, 84, 84, 51, 55, 40]
