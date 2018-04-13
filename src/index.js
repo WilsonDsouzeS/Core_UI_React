@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import Delay from 'react-delay';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import Auth from './Auth/Auth.js';
 // Styles
 // Import Flag Icons Set
@@ -16,17 +17,15 @@ import '../scss/core/_dropdown-menu-right.scss'
 
 // Containers
 import Full from './containers/Full/'
-const auth=new Auth();
-console.log(auth.isAuthenticated());
-if(auth.isAuthenticated()!=true)
-{
-    auth.login();
-    auth.handleAuthentication();
+const auth = new Auth();
+if (auth.isAuthenticated() != true) {
+  auth.login();
+  auth.handleAuthentication();
 }
 ReactDOM.render((
   <HashRouter>
     <Switch>
-      <Route path="/" name="Home" component={Full}/>
+      <Route path="/" name="Home" component={Full} />
     </Switch>
   </HashRouter>
 ), document.getElementById('root'));

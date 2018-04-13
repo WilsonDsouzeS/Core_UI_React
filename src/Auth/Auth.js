@@ -18,7 +18,7 @@ export default class Auth {
   }
 
   login() {
-      auth0.authorize();  
+    auth0.authorize();
   }
 
   handleAuthentication() {
@@ -35,17 +35,19 @@ export default class Auth {
   }
 
   setSession(authResult) {
+
     // Set the time that the access token will expire at
     let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    // to avoid interval used this..
+    window.location.reload();
     // navigate to the home route
     history.replace('/#/dashboard');
   }
 
   logout() {
-    console.log("logout");
     // Clear access token and ID token from local storage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');

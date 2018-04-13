@@ -1,11 +1,8 @@
 const routes = {
   '/': 'Home',
+  '/trend_Chart': 'Trend Chart',
   '/dashboard': 'Dashboard',
-  '/machines': 'Machine',
-  '/machine_details': 'Machine / Machine_Details',
-  '/trend_Chart': 'Machine / Machine_Details / Trend Chart',
-  '/mqtt_test': 'Mqtt-Test',
-  '/charts': 'Charts',
+  '/overall_status': 'Overall_Status',  
   '/callback':'Callback'
 };
 export default routes;
