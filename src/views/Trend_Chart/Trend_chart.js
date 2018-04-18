@@ -244,7 +244,8 @@ const line9 = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: ["88.798838", "87.937398", "87.477219", "88.410740", "88.058600", "87.568114", "88.355876", "88.513107", "88.289554"]
+      data: ["88.798838", "87.937398", "87.477219", "88.410740", "88.058600", "87.568114", "88.355876", "88.513107", "88.289554"],
+      data: ["10", "87.937398", "87.477219", "88.410740", "88.058600", "87.568114", "88.355876", "88.513107", "88.289554"]
     }
   ]
 };
@@ -261,7 +262,7 @@ class Trend_Chart extends Component {
             <Card>
               <CardHeader>
                 <h2>Trend Chart - {Machine_Id}</h2>
-                <Link to="/machine_details"><i className="fa fa-arrow-circle-left"></i> Back</Link>
+                <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
                 <div className="pull-right">
                   Date :- {date.getDate() + "-" + c_month + "-" + date.getFullYear()} &nbsp; &nbsp;
                   Time :- {date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()}
