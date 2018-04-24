@@ -42,7 +42,6 @@ var status_val;
 
 
 function onChartClick(param, echarts) {
-  console.log(param);
   if (param.componentSubType == "pie") {
     Overall_Status = param.name;
     localStorage.setItem("Title_Key", param.seriesName);
@@ -51,17 +50,23 @@ function onChartClick(param, echarts) {
       status_val = 1;
     else if (Overall_Status == "Fail")
       status_val = 0;
-    axios.get('http://192.168.20.26:5000/resultdetails/' + status_val)
+    axios.get('http://192.168.20.26:5000/productwiseCnt/' + status_val)
       .then(function (response) {
-        console.log(response.data.data);
-        localStorage.setItem("Overall_status_API_Responce", JSON.stringify(response.data.data));
+        localStorage.setItem("Overall_Product_API_Responce", JSON.stringify(response.data.data));
       })
       .then(function () {
-        window.location = '/#/overall_status';
+        axios.get('http://192.168.20.26:5000/test')
+          .then(function (response) {
+            console.log(response);
+            localStorage.setItem("Last_7_Days_API_Responce", JSON.stringify(response.data.data));
+          })
+          .then(function () {
+            window.location = '/#/overall_status';
+          });
       });
   }
   else if (param.componentSubType == "bar") {
-    var Day_Wise_Status="Day_Wise_Status";
+    var Day_Wise_Status = "Day_Wise_Status";
     localStorage.setItem("Title_Key", Day_Wise_Status);
     localStorage.setItem("Title_Value", param.seriesName);
     Overall_Status = param.seriesName;
@@ -75,20 +80,26 @@ function onChartClick(param, echarts) {
       status_val = 0;
     axios.get('http://192.168.20.26:5000/resultdetails/' + status_val + "/" + parsed_date)
       .then(function (response) {
-        console.log(response.data.data);
-        localStorage.setItem("Overall_status_API_Responce", JSON.stringify(response.data.data));
+        localStorage.setItem("Overall_Product_API_Responce", JSON.stringify(response.data.data));
       })
       .then(function () {
-        window.location = '/#/overall_status';
+        axios.get('http://192.168.20.26:5000/test')
+          .then(function (response) {
+            console.log(response);
+            localStorage.setItem("Last_7_Days_API_Responce", JSON.stringify(response.data.data));
+          })
+          .then(function () {
+            window.location = '/#/overall_status';
+          });
       });
   }
 };
 
 function onChartReady(echarts) {
-  localStorage.removeItem("Overall_status_API_Responce");
+  localStorage.removeItem("Overall_Product_API_Responce");
+  localStorage.removeItem("Last_7_Days_API_Responce");  
   localStorage.removeItem("Title_Key");
   localStorage.removeItem("Title_Value");
-  console.log('echart is ready');
 };
 var mount_data = true;
 export default class Dashboard extends Component {
@@ -120,7 +131,6 @@ export default class Dashboard extends Component {
   }
   onload_overall_chart_data() {
     if (mount_data) {
-      console.log("Overall status");
       axios.get('http://192.168.20.26:5000/summary')
         .then(function (response) {
           var result = response.data.data;
@@ -154,6 +164,7 @@ export default class Dashboard extends Component {
                 type: 'pie',
                 radius: '55%',
                 center: ['50%', '50%'],
+                color:['red','green'],
                 data: series_data,
                 itemStyle: {
                   emphasis: {
@@ -165,7 +176,6 @@ export default class Dashboard extends Component {
               }
             ]
           };
-          console.log(pie_getOption);
         })
         .catch(function (error) {
           console.log(error);
@@ -177,7 +187,6 @@ export default class Dashboard extends Component {
       axios.get('http://192.168.20.26:5000/datewiseresult')
         .then(function (response) {
           var result = response.data.data;
-          console.log(result);
           for (var i = 0; i < result.length; i++) {
             last_7_days[i] = result[i].ResultDate;
             pass_data[i] = result[i].PassCnt;
@@ -226,6 +235,7 @@ export default class Dashboard extends Component {
                 type: 'bar',
                 stack: 'two',
                 itemStyle: itemStyle,
+                color:['Green'],                
                 data: pass_data
               },
               {
@@ -233,11 +243,11 @@ export default class Dashboard extends Component {
                 type: 'bar',
                 stack: 'two',
                 itemStyle: itemStyle,
+                color:['red'],                                
                 data: fail_data
               }
             ]
           };
-          console.log(bar_getoption);
         })
         .then(function () {
           mount_data = false;

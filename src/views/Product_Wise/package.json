@@ -1,0 +1,6 @@
+{
+  "name": "Product_Wise",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Product_Wise.js"
+}
