@@ -106,10 +106,19 @@
   }
 }
 
+
 // Card Actions
 .card-header {
   > i {
     margin-right: $spacer / 2;
+  }
+  .vr
+  {
+    display:inline;
+    height:100%;
+    width:1px;
+    border:1px inset;
+    margin:5px
   }
   .card-actions {
     position: absolute;

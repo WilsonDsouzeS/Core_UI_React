@@ -55,7 +55,7 @@ function onChartClick(param, echarts) {
         localStorage.setItem("Overall_Product_API_Responce", JSON.stringify(response.data.data));
       })
       .then(function () {
-        axios.get('http://192.168.20.26:5000/test')
+        axios.get('http://192.168.20.26:5000/datewiseproductresult')
           .then(function (response) {
             console.log(response);
             localStorage.setItem("Last_7_Days_API_Responce", JSON.stringify(response.data.data));
@@ -78,12 +78,13 @@ function onChartClick(param, echarts) {
       status_val = 1;
     else if (Overall_Status == "Fail")
       status_val = 0;
-    axios.get('http://192.168.20.26:5000/resultdetails/' + status_val + "/" + parsed_date)
+    axios.get('http://192.168.20.26:5000/productwiseCnt/' + status_val)
       .then(function (response) {
+        console.log(response.data.data);
         localStorage.setItem("Overall_Product_API_Responce", JSON.stringify(response.data.data));
       })
       .then(function () {
-        axios.get('http://192.168.20.26:5000/test')
+        axios.get('http://192.168.20.26:5000/datewiseproductresult')
           .then(function (response) {
             console.log(response);
             localStorage.setItem("Last_7_Days_API_Responce", JSON.stringify(response.data.data));
@@ -100,6 +101,12 @@ function onChartReady(echarts) {
   localStorage.removeItem("Last_7_Days_API_Responce");  
   localStorage.removeItem("Title_Key");
   localStorage.removeItem("Title_Value");
+  localStorage.removeItem("Product_Status");
+  localStorage.removeItem("Product_Name");  
+  localStorage.removeItem("Product_wise_overall");
+  localStorage.removeItem("Selected_Date_4_Trend");
+  localStorage.removeItem("Selected_Product_4_Trend");
+  localStorage.removeItem("Date_Wise_Trend");  
 };
 var mount_data = true;
 export default class Dashboard extends Component {

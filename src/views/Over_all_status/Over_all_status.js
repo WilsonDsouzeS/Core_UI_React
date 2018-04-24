@@ -18,29 +18,58 @@ function onChartReady(echarts) {
   console.log('echart is ready');
 };
 var status;
+
+
 function onChartClick(param, echarts) {
   console.log(param);
   localStorage.setItem("Product_Status", param.seriesName);
   localStorage.setItem("Product_Name", param.name);
-  if (param.seriesName == "Pass")
-    status = 1;
-  else if (param.seriesName == "Fail")
-    status = 0;
-  axios.get('http://192.168.20.26:5000/resultdetails/' + status)
-    .then(function (response) {
-      console.log(response.data.data);
-      var fulldata = response.data.data;
-      var new_array = fulldata.filter(
-        function (el) {
-          return el.ProductName == param.name
-        });
-      console.log(new_array);
-      localStorage.setItem("Product_wise_overall", JSON.stringify(new_array));
-    })
-    .then(function () {
-      window.location = '/#/product_wise';
-    });
+  if (param.seriesName == "Fail" || param.seriesName == "Pass") {
+    if (param.seriesName == "Pass")
+      status = 1;
+    else if (param.seriesName == "Fail")
+      status = 0;
+    axios.get('http://192.168.20.26:5000/resultdetails/' + status)
+      .then(function (response) {
+        console.log(response.data.data);
+        var fulldata = response.data.data;
+        var new_array = fulldata.filter(
+          function (el) {
+            return el.ProductName == param.name
+          });
+        console.log(new_array);
+        localStorage.setItem("Product_wise_overall", JSON.stringify(new_array));
+      })
+      .then(function () {
+        window.location = '/#/product_wise';
+      });
+  }
+  else {
+    var Title_Value = localStorage.getItem("Title_Value");
+    console.log(Title_Value);
+    localStorage.setItem("Selected_Date_4_Trend", param.name);
+    localStorage.setItem("Selected_Product_4_Trend", param.seriesName);
+    if (Title_Value == "Pass")
+      status = 1;
+    else if (Title_Value == "Fail")
+      status = 0;
+    axios.get('http://192.168.20.26:5000/resultdetails/' + status)
+      .then(function (response) {
+        console.log(response.data.data);
+        var fulldata = response.data.data;
+        var new_array = fulldata.filter(
+          function (el) {
+            return el.ProductName == param.seriesName
+          });
+        console.log(new_array);
+        localStorage.setItem("Date_Wise_Trend", JSON.stringify(new_array));
+      })
+      .then(function () {
+        window.location = '/#/trend_Chart';
+      });
+  }
 };
+
 var last_7_days_product_wise = {};
 export default class Over_all_status extends Component {
   constructor(props) {
@@ -120,7 +149,7 @@ export default class Over_all_status extends Component {
           name: Title_Value,
           type: 'bar',
           itemStyle: itemStyle,
-          color:['pink'],                                    
+          color: ['pink'],
           data: series_data1
         }
       ]
@@ -144,6 +173,10 @@ export default class Over_all_status extends Component {
             series_data_product1 = series_data_product1.concat(series_data2[j][k].PassCnt);
           if (series_data2[j][k].ProductName == "Product2")
             series_data_product2 = series_data_product2.concat(series_data2[j][k].PassCnt);
+          if (series_data2[j][k].ProductName == null) {
+            series_data_product1 = series_data_product1.concat("0");
+            series_data_product2 = series_data_product2.concat("0");
+          }
         }
       }
       else if (Title_Value == "Fail") {
@@ -152,6 +185,10 @@ export default class Over_all_status extends Component {
             series_data_product1 = series_data_product1.concat(series_data2[j][k].FailCnt);
           if (series_data2[j][k].ProductName == "Product2")
             series_data_product2 = series_data_product2.concat(series_data2[j][k].FailCnt);
+          if (series_data2[j][k].ProductName == null) {
+            series_data_product1 = series_data_product1.concat("0");
+            series_data_product2 = series_data_product2.concat("0");
+          }
         }
       }
     }
@@ -182,7 +219,7 @@ export default class Over_all_status extends Component {
           name: 'Product1',
           type: 'bar',
           data: series_data_product1,
-          color:['cyan'],                          
+          color: ['cyan'],
           markPoint: {
             data: [
               { type: 'max' },
@@ -199,7 +236,7 @@ export default class Over_all_status extends Component {
           name: 'Product2',
           type: 'bar',
           data: series_data_product2,
-          color:['purple'],                                    
+          color: ['purple'],
           markPoint: {
             data: [
               { type: 'max' },

@@ -24,13 +24,29 @@ class Trend_Chart extends Component {
     var CTDB=[];
     var CTDB_LCL=[];
     var CTDB_UCL=[];
-    var FPTB=[];
+
+    var FPTD=[];
+    var FPTD_LCL=[];
+    var FPTD_UCL=[];
+
     var HYS=[];
+    var HYS_LCL=[];
+    var HYS_UCL=[];
+
     var IPF=[];
+    var IPF_LCL=[];
+    var IPF_UCL=[];
+
     var RPF=[];
+    var RPF_LCL=[];
+    var RPF_UCL=[];
+
     var WOTM=[];
+    var WOTM_LCL=[];
+    var WOTM_UCL=[];
+
     var CTDB_Title="CTDB";
-    var FPTB_Title="FPTB";
+    var FPTD_Title="FPTD";
     var HYS_Title="HYS";
     var IPF_Title="IPF";
     var RPF_Title="RPF";
@@ -43,21 +59,37 @@ class Trend_Chart extends Component {
       CTDB[i]=trend_details[i].CTDB_Val;
       CTDB_LCL[i]=trend_details[i].CTDB_Val-3;
       CTDB_UCL[i]=trend_details[i].CTDB_Val+3;
-      FPTB[i]=trend_details[i].FPTD_Val;
+
+      FPTD[i]=trend_details[i].FPTD_Val;
+      FPTD_LCL[i]=trend_details[i].FPTD_Val-3;
+      FPTD_UCL[i]=trend_details[i].FPTD_Val+3;
+
       HYS[i]=trend_details[i].HYS;
+      HYS_LCL[i]=trend_details[i].HYS-3;
+      HYS_UCL[i]=trend_details[i].HYS+3;
+
       IPF[i]=trend_details[i].IPF_Val;
+      IPF_LCL[i]=trend_details[i].IPF_Val-3;
+      IPF_UCL[i]=trend_details[i].IPF_Val+3;
+
       RPF[i]=trend_details[i].RPF_Val;
+      RPF_LCL[i]=trend_details[i].RPF_Val-3;
+      RPF_UCL[i]=trend_details[i].RPF_Val+3;
+
       WOTM[i]=trend_details[i].WOTM;
+      WOTM_LCL[i]=trend_details[i].WOTM-3;
+      WOTM_UCL[i]=trend_details[i].WOTM+3;
+
     }
     
-    const CTDB_Chart=trend_call(parameter_time,CTDB,CTDB_Title);
-    const FPTB_Chart=trend_call(parameter_time,FPTB,FPTB_Title);
-    const HYS_Chart=trend_call(parameter_time,HYS,HYS_Title);
-    const IPF_Chart=trend_call(parameter_time,IPF,IPF_Title);
-    const RPF_Chart=trend_call(parameter_time,RPF,RPF_Title);
-    const WOTM_Chart=trend_call(parameter_time,WOTM,WOTM_Title);
+    const CTDB_Chart=trend_call(parameter_time,CTDB,CTDB_Title,CTDB_LCL,CTDB_UCL);
+    const FPTB_Chart=trend_call(parameter_time,FPTD,FPTD_Title,FPTD_LCL,FPTD_UCL);
+    const HYS_Chart=trend_call(parameter_time,HYS,HYS_Title,HYS_LCL,HYS_UCL);
+    const IPF_Chart=trend_call(parameter_time,IPF,IPF_Title,IPF_LCL,IPF_UCL);
+    const RPF_Chart=trend_call(parameter_time,RPF,RPF_Title,RPF_LCL,RPF_UCL);
+    const WOTM_Chart=trend_call(parameter_time,WOTM,WOTM_Title,WOTM_LCL,WOTM_UCL);
     
-    function trend_call(P_time,P_value,P_Title)
+    function trend_call(P_time,P_value,P_Title,P_LCL,P_UCL)
     {
       const parameter_trend = {
         title: {
@@ -87,7 +119,7 @@ class Trend_Chart extends Component {
           {
             name: 'UCL',
             type: 'line',
-            data: CTDB_UCL
+            data: P_LCL
           },
           {
             name: 'CL',
@@ -97,7 +129,7 @@ class Trend_Chart extends Component {
           {
             name: 'LCL',
             type: 'line',
-            data: CTDB_LCL
+            data: P_UCL
           }
         ]
       };
@@ -110,7 +142,6 @@ class Trend_Chart extends Component {
             <Card>
               <CardHeader>
                 <h2>Trend Chart - {Product_Name} - {Selected_Date}</h2>
-                <Link to="/product_wise"><i className="fa fa-arrow-circle-left"></i> Back</Link>
                 <div className="pull-right">
                   Date :- {date.getDate() + "-" + c_month + "-" + date.getFullYear()} &nbsp; &nbsp;
                   Time :- {date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()}

@@ -22,7 +22,7 @@ function onChartClick(param, echarts) {
   localStorage.setItem("Selected_Date_4_Trend", param.name);
   localStorage.setItem("Selected_Product_4_Trend", param.seriesName);
   var present_data = JSON.parse(localStorage.getItem("Product_wise_overall"));
-  console.log(present_data);  
+  console.log(present_data);
   var new_array = present_data.filter(
     function (el) {
       return el.ResultDate == param.name;
@@ -55,12 +55,16 @@ export default class Product_Wise extends Component {
         for (var k = 0; k < series_data2[j].length; k++) {
           if (series_data2[j][k].ProductName == Title_Key)
             series_data_product1 = series_data_product1.concat(series_data2[j][k].PassCnt);
+          if (series_data2[j][k].ProductName == null)
+            series_data_product1 = series_data_product1.concat("0");
         }
       }
       else if (Title_Value == "Fail") {
         for (var k = 0; k < series_data2[j].length; k++) {
           if (series_data2[j][k].ProductName == Title_Key)
             series_data_product1 = series_data_product1.concat(series_data2[j][k].FailCnt);
+          if (series_data2[j][k].ProductName == null)
+            series_data_product1 = series_data_product1.concat("0");
         }
       }
     }
