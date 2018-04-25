@@ -278,122 +278,155 @@ export default class Over_all_status extends Component {
       ]
     };
 
-    var Heat_Map_Option;
+    // Trend for failure secnario
     if (Product_Name != null) {
-      // Heat Map for failure secnario
-      var heat_map_data = JSON.parse(localStorage.getItem("Heat_Map_Data"));
-      var new_array = heat_map_data.filter(
+      var Failure_Trend_Data = JSON.parse(localStorage.getItem("Failure_Trend_Data"));
+      var new_array = Failure_Trend_Data.filter(
         function (el) {
           return el.ProductName == Product_Name
         });
-      var product_date = [];
-      var product_data = [];
-      var product_data1 = []
-      for (j = 0; j < 6; j++) {
-        for (var i = 0; i < new_array.length; i++) {
-          product_date[i] = new_array[i].ResultDate;
-          if (j == 0) {
-            var val = new_array[i].IPF_Result;
-            var result_data;
-            if (val == "Pass")
-              result_data = 2
-            else if (val == "Fail")
-              result_data = 1
-          }
-          else if (j == 1) {
-            var val = new_array[i].RPF_Result;
-            var result_data;
-            if (val == "Pass")
-              result_data = 2
-            else if (val == "Fail")
-              result_data = 1
-          }
-          else if (j == 2) {
-            var val = new_array[i].CTDB_Result;
-            var result_data;
-            if (val == "Pass")
-              result_data = 2
-            else if (val == "Fail")
-              result_data = 1
-          }
-          else if (j == 3) {
-            var val = new_array[i].FPTD_Result;
-            var result_data;
-            if (val == "Pass")
-              result_data = 2
-            else if (val == "Fail")
-              result_data = 1
-          }
-          else if (j == 4) {
-            var val = new_array[i].WOTM_Result;
-            var result_data;
-            if (val == "Pass")
-              result_data = 2
-            else if (val == "Fail")
-              result_data = 1
-          }
-          else if (j == 5) {
-            var val = new_array[i].HYS_Result;
-            var result_data;
-            if (val == "Pass")
-              result_data = 2
-            else if (val == "Fail")
-              result_data = 1
-          }
-          product_data[i] = [j, i, result_data];
-          product_data1 = product_data1.concat([product_data[i]]);
-        }
-      }
-      var parameters = ['IPF', 'RPF', 'CTDB', 'FPTD', 'WOTM', 'HYS'];
-      console.log(product_data1);
-      product_data1 = product_data1.map(function (item) {
-        return [item[1], item[0], item[2] || '-'];
-      });
+      var CTDB=[];
+      var CTDB_LCL=[];
+      var CTDB_UCL=[];
+  
+      var FPTD=[];
+      var FPTD_LCL=[];
+      var FPTD_UCL=[];
+  
+      var HYS=[];
+      var HYS_LCL=[];
+      var HYS_UCL=[];
+  
+      var IPF=[];
+      var IPF_LCL=[];
+      var IPF_UCL=[];
+  
+      var RPF=[];
+      var RPF_LCL=[];
+      var RPF_UCL=[];
+  
+      var WOTM=[];
+      var WOTM_LCL=[];
+      var WOTM_UCL=[];
+  
+      var CTDB_Title="CTDB";
+      var FPTD_Title="FPTD";
+      var HYS_Title="HYS";
+      var IPF_Title="IPF";
+      var RPF_Title="RPF";
+      var WOTM_Title="WOTM";
+      var parameter_time=[];
+      var CTDB_Chart;
+      var FPTB_Chart;
+      var HYS_Chart;
+      var IPF_Chart;
+      var RPF_Chart;
+      var WOTM_Chart;
 
-      Heat_Map_Option = {
-        tooltip: {
-          position: 'top'
+      var wotm_lcl=20;
+      var wotm_ucl=40;
+
+      var ipf_lcl=20;
+      var ipf_ucl=30;
+
+      var rpf_lcl=-5;
+      var rpf_ucl=30;
+
+      var hys_lcl=75;
+      var hys_ucl=100;
+
+      var ctdb_lcl=-2;
+      var ctdb_ucl=10;
+
+      var fptd_lcl=10;
+      var fptd_ucl=30;
+
+      for(var i=0;i<new_array.length;i++)
+      {
+        parameter_time[i]=new_array[i].ResultDate;
+        CTDB[i]=new_array[i].CTDB_Val;
+        CTDB_LCL[i]=ctdb_lcl;
+        CTDB_UCL[i]=ctdb_ucl;
+  
+        FPTD[i]=new_array[i].FPTD_Val;
+        FPTD_LCL[i]=fptd_lcl;
+        FPTD_UCL[i]=fptd_ucl;
+  
+        HYS[i]=new_array[i].HYS;
+        HYS_LCL[i]=hys_lcl;
+        HYS_UCL[i]=hys_ucl;
+  
+        IPF[i]=new_array[i].IPF_Val;
+        IPF_LCL[i]=ipf_lcl;
+        IPF_UCL[i]=ipf_ucl;
+  
+        RPF[i]=new_array[i].RPF_Val;
+        RPF_LCL[i]=rpf_lcl;
+        RPF_UCL[i]=rpf_ucl;
+  
+        WOTM[i]=new_array[i].WOTM; 
+        WOTM_LCL[i]=wotm_lcl;
+        WOTM_UCL[i]=wotm_ucl;
+      }
+            
+      CTDB_Chart=trend_call(parameter_time,CTDB,CTDB_Title,CTDB_LCL,CTDB_UCL);
+      FPTB_Chart=trend_call(parameter_time,FPTD,FPTD_Title,FPTD_LCL,FPTD_UCL);
+      HYS_Chart=trend_call(parameter_time,HYS,HYS_Title,HYS_LCL,HYS_UCL);
+      IPF_Chart=trend_call(parameter_time,IPF,IPF_Title,IPF_LCL,IPF_UCL);
+      RPF_Chart=trend_call(parameter_time,RPF,RPF_Title,RPF_LCL,RPF_UCL);
+      WOTM_Chart=trend_call(parameter_time,WOTM,WOTM_Title,WOTM_LCL,WOTM_UCL);
+    }
+
+    function trend_call(P_time,P_value,P_Title,P_LCL,P_UCL)
+    {
+      const parameter_trend = {
+        title: {
+          text: P_Title
         },
-        animation: false,
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['LCL', 'CL', 'UCL']
+        },
         grid: {
-          height: '50%',
-          y: '10%'
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
         },
         xAxis: {
           type: 'category',
-          data: product_date,
-          splitArea: {
-            show: true
-          }
+          boundaryGap: false,
+          data: P_time,
         },
         yAxis: {
-          type: 'category',
-          data: parameters,
-          splitArea: {
-            show: true
-          }
+          type: 'value',
+          min : -10,
+          max : 100
         },
-        visualMap: {
-          min: 1,
-          max: 2,
-          calculable: true,
-          orient: 'horizontal',
-          left: 'center',
-          bottom: '15%',
-          color: ['green', 'red']
-        },
-        series: [{
-          name: Product_Name,
-          type: 'heatmap',
-          data: product_data1,
-          color: ['pink', 'purple'],
-          label: {
-            normal: {
-              show: false
-            }
+        series: [
+          {
+            name: 'LCL',
+            type: 'line',
+            smooth: true,
+            data: P_LCL
+          },
+          {
+            name: 'CL',
+            type: 'line',
+            smooth: true,
+            data: P_value
+          },
+          {
+            name: 'UCL',
+            type: 'line',
+            smooth: true,
+            data: P_UCL
           }
-        }]
+        ]
       };
+      return parameter_trend;
     }
     let onEvents = {
       'click': this.onChartClick
@@ -471,37 +504,67 @@ export default class Over_all_status extends Component {
         <Row>
           {!this.state.fail_param && (
             <Col xs="12" lg="12">
-              <Card>
-                <CardHeader>
-                  <strong>{Product_Name} - {Title_Value}</strong>
-                  <div className="card-actions">
-                    <a onClick={this.toggle_heatmap_fail}>
-                      <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
-                    </a>
-                  </div>
-                </CardHeader>
-                <CardBody>
-                  <ReactEcharts
-                    option={Heat_Map_Option}
-                    style={{ height: 350 }}
-                    onChartReady={onChartReady}
-                    onEvents={onEvents} />
-                </CardBody>
-              </Card>
-              <Modal isOpen={this.state.heatmap_fail} toggle={this.toggle_heatmap_fail}
-                className={'modal-lg ' + this.props.className}>
-                <ModalHeader toggle={this.toggle_heatmap_fail}>
-                  <strong>Product Wise - {Title_Value}</strong>
-                </ModalHeader>
-                <ModalBody>
-                  <ReactEcharts
-                    option={Heat_Map_Option}
-                    style={{ height: 600 }}
-                    onChartReady={onChartReady}
-                    onEvents={onEvents} />
-                </ModalBody>
-              </Modal>
-            </Col>)}
+            <Card>
+              <CardHeader>
+                <h2>Failure Trend</h2>
+              </CardHeader>
+              <CardBody>
+                <Row>
+                  <Col xs="12" lg="4">
+                    <div className="chart-wrapper">
+                      <ReactEcharts
+                        option={CTDB_Chart}
+                        style={{ height: 350 }}
+                      />
+                    </div>
+                  </Col>
+                  <Col xs="12" lg="4">
+                    <div className="chart-wrapper">
+                      <ReactEcharts
+                        option={FPTB_Chart}
+                        style={{ height: 350 }}
+                      />
+                    </div>
+                  </Col>
+                  <Col xs="12" lg="4">
+                    <div className="chart-wrapper">
+                      <ReactEcharts
+                        option={HYS_Chart}
+                        style={{ height: 350 }}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+                <br/>
+                <Row>
+                  <Col xs="12" lg="4">
+                    <div className="chart-wrapper">
+                      <ReactEcharts
+                        option={IPF_Chart}
+                        style={{ height: 350 }}
+                      />
+                    </div>
+                  </Col>
+                  <Col xs="12" lg="4">
+                    <div className="chart-wrapper">
+                      <ReactEcharts
+                        option={RPF_Chart}
+                        style={{ height: 350 }}
+                      />
+                    </div>
+                  </Col>
+                  <Col xs="12" lg="4">
+                    <div className="chart-wrapper">
+                      <ReactEcharts
+                        option={WOTM_Chart}
+                        style={{ height: 350 }}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>)}
         </Row>
       </div>
     );

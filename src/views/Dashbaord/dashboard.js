@@ -46,7 +46,7 @@ function onChartClick(param, echarts) {
     axios.get('http://192.168.20.26:5000/resultdetails/0')
       .then(function (response) {
         console.log(response.data.data);
-        localStorage.setItem("Heat_Map_Data", JSON.stringify(response.data.data));
+        localStorage.setItem("Failure_Trend_Data", JSON.stringify(response.data.data));
       });
   }
   if (param.componentSubType == "pie") {
@@ -114,7 +114,7 @@ function onChartReady(echarts) {
   localStorage.removeItem("Selected_Date_4_Trend");
   localStorage.removeItem("Selected_Product_4_Trend");
   localStorage.removeItem("Date_Wise_Trend");
-  localStorage.removeItem("Heat_Map_Data");  
+  localStorage.removeItem("Failure_Trend_Data");  
 };
 var mount_data = true;
 export default class Dashboard extends Component {

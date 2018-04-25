@@ -52,33 +52,52 @@ class Trend_Chart extends Component {
     var RPF_Title="RPF";
     var WOTM_Title="WOTM";
     var parameter_time=[];
+
+    var wotm_lcl=20;
+    var wotm_ucl=40;
+
+    var ipf_lcl=-5;
+    var ipf_ucl=30;
+
+    var rpf_lcl=-5;
+    var rpf_ucl=30;
+
+    var hys_lcl=75;
+    var hys_ucl=100;
+
+    var ctdb_lcl=-2;
+    var ctdb_ucl=10;
+
+    var fptd_lcl=10;
+    var fptd_ucl=30;
+
     
     for(var i=0;i<trend_details.length;i++)
     {
       parameter_time[i]=trend_details[i].ResultTime;
       CTDB[i]=trend_details[i].CTDB_Val;
-      CTDB_LCL[i]=trend_details[i].CTDB_Val-3;
-      CTDB_UCL[i]=trend_details[i].CTDB_Val+3;
+      CTDB_LCL[i]=ctdb_lcl;
+      CTDB_UCL[i]=ctdb_ucl;
 
       FPTD[i]=trend_details[i].FPTD_Val;
-      FPTD_LCL[i]=trend_details[i].FPTD_Val-3;
-      FPTD_UCL[i]=trend_details[i].FPTD_Val+3;
+      FPTD_LCL[i]=fptd_lcl;
+      FPTD_UCL[i]=fptd_ucl;
 
       HYS[i]=trend_details[i].HYS;
-      HYS_LCL[i]=trend_details[i].HYS-3;
-      HYS_UCL[i]=trend_details[i].HYS+3;
+      HYS_LCL[i]=hys_lcl;
+      HYS_UCL[i]=hys_ucl;
 
       IPF[i]=trend_details[i].IPF_Val;
-      IPF_LCL[i]=trend_details[i].IPF_Val-3;
-      IPF_UCL[i]=trend_details[i].IPF_Val+3;
+      IPF_LCL[i]=ipf_lcl;
+      IPF_UCL[i]=ipf_ucl;
 
       RPF[i]=trend_details[i].RPF_Val;
-      RPF_LCL[i]=trend_details[i].RPF_Val-3;
-      RPF_UCL[i]=trend_details[i].RPF_Val+3;
+      RPF_LCL[i]=rpf_lcl;
+      RPF_UCL[i]=rpf_ucl;
 
-      WOTM[i]=trend_details[i].WOTM;
-      WOTM_LCL[i]=trend_details[i].WOTM-3;
-      WOTM_UCL[i]=trend_details[i].WOTM+3;
+      WOTM[i]=trend_details[i].WOTM; 
+      WOTM_LCL[i]=wotm_lcl;
+      WOTM_UCL[i]=wotm_ucl;
 
     }
     
@@ -117,18 +136,21 @@ class Trend_Chart extends Component {
         },
         series: [
           {
-            name: 'UCL',
+            name: 'LCL',
             type: 'line',
+            smooth: true,
             data: P_LCL
           },
           {
             name: 'CL',
             type: 'line',
+            smooth: true,
             data: P_value
           },
           {
-            name: 'LCL',
+            name: 'UCL',
             type: 'line',
+            smooth: true,
             data: P_UCL
           }
         ]
