@@ -9,7 +9,7 @@ import {
   CardBody,
   CardFooter,
   Table,
-  Collapse, Button, Fade
+  Collapse, Button, Fade, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import ReactEcharts from 'echarts-for-react';
 import axios from 'axios';
@@ -32,15 +32,35 @@ function onChartClick(param, echarts) {
   window.location = '/#/trend_Chart';
 };
 export default class Product_Wise extends Component {
-  constructor() {
-    super();
-    this.state = JSON.parse(localStorage.getItem("Product_wise_overall"));
+  constructor(props) {
+    super(props);
+    this.state1 = JSON.parse(localStorage.getItem("Product_wise_overall"));
+    this.state = {
+      overall_bar: false,
+      last_7_bar: false
+    };
+    this.toggle_overall_bar = this.toggle_overall_bar.bind(this);
+    this.toggle_last_7_bar = this.toggle_last_7_bar.bind(this);
+  }
+  toggle_overall_bar() {
+    this.setState({
+      overall_bar: !this.state.overall_bar,
+    });
+  }
+  toggle_last_7_bar() {
+    this.setState({
+      last_7_bar: !this.state.last_7_bar,
+    });
   }
 
   render() {
     var Title_Key = localStorage.getItem("Product_Name");
     var Title_Value = localStorage.getItem("Product_Status");
-
+    var color_depends_status;
+    if (Title_Value == "Pass")
+      color_depends_status = ['Green'];
+    else
+      color_depends_status = ['Red'];
     var Last_7_Days_API_Responce = JSON.parse(localStorage.getItem("Last_7_Days_API_Responce"));
     var legend_data2 = [];
     var series_data2 = [];
@@ -112,6 +132,7 @@ export default class Product_Wise extends Component {
           name: Title_Key,
           type: 'bar',
           data: series_data_product1,
+          color: color_depends_status,
           markLine: {
             lineStyle: {
               normal: {
@@ -135,9 +156,12 @@ export default class Product_Wise extends Component {
           <Col xs="12" lg="6">
             <Card>
               <CardHeader>
+                <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
                 <strong>{Title_Key} - {Title_Value}</strong>
                 <div className="card-actions">
-                  <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
+                  <a onClick={this.toggle_overall_bar}>
+                    <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
+                  </a>
                 </div>
               </CardHeader>
               <CardBody>
@@ -153,18 +177,44 @@ export default class Product_Wise extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.map((data, i) => <TableRow key={i} data={data} />)}
+                    {this.state1.map((data, i) => <TableRow key={i} data={data} />)}
                   </tbody>
                 </Table>
               </CardBody>
             </Card>
+            <Modal isOpen={this.state.overall_bar} toggle={this.toggle_overall_bar}
+              className={'modal-lg ' + this.props.className}>
+              <ModalHeader toggle={this.toggle_overall_bar}>
+                <strong>{Title_Key} - {Title_Value}</strong>
+              </ModalHeader>
+              <ModalBody>
+                <Table responsive striped>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Product Name</th>
+                      <th>Product No</th>
+                      <th>Serial No</th>
+                      <th>Barcode</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state1.map((data, i) => <TableRow key={i} data={data} />)}
+                  </tbody>
+                </Table>
+              </ModalBody>
+            </Modal>
           </Col>
           <Col xs="12" lg="6">
             <Card>
               <CardHeader>
+                <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
                 <strong>{Title_Key} - {Title_Value}</strong>
                 <div className="card-actions">
-                  <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
+                  <a onClick={this.toggle_last_7_bar}>
+                    <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
+                  </a>
                 </div>
               </CardHeader>
               <CardBody>
@@ -175,6 +225,19 @@ export default class Product_Wise extends Component {
                   onEvents={onEvents} />
               </CardBody>
             </Card>
+            <Modal isOpen={this.state.last_7_bar} toggle={this.toggle_last_7_bar}
+              className={'modal-lg ' + this.props.className}>
+              <ModalHeader toggle={this.toggle_last_7_bar}>
+                <strong>{Title_Key} - {Title_Value}</strong>
+              </ModalHeader>
+              <ModalBody>
+                <ReactEcharts
+                  option={bar_product_day_wise}
+                  style={{ height: 350 }}
+                  onChartReady={onChartReady}
+                  onEvents={onEvents} />
+              </ModalBody>
+            </Modal>
           </Col>
         </Row>
       </div>

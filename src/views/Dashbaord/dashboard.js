@@ -42,6 +42,13 @@ var status_val;
 
 
 function onChartClick(param, echarts) {
+  if (param.name=="Fail" || param.seriesName=="Fail") {
+    axios.get('http://192.168.20.26:5000/resultdetails/0')
+      .then(function (response) {
+        console.log(response.data.data);
+        localStorage.setItem("Heat_Map_Data", JSON.stringify(response.data.data));
+      });
+  }
   if (param.componentSubType == "pie") {
     Overall_Status = param.name;
     localStorage.setItem("Title_Key", param.seriesName);
@@ -98,15 +105,16 @@ function onChartClick(param, echarts) {
 
 function onChartReady(echarts) {
   localStorage.removeItem("Overall_Product_API_Responce");
-  localStorage.removeItem("Last_7_Days_API_Responce");  
+  localStorage.removeItem("Last_7_Days_API_Responce");
   localStorage.removeItem("Title_Key");
   localStorage.removeItem("Title_Value");
   localStorage.removeItem("Product_Status");
-  localStorage.removeItem("Product_Name");  
+  localStorage.removeItem("Product_Name");
   localStorage.removeItem("Product_wise_overall");
   localStorage.removeItem("Selected_Date_4_Trend");
   localStorage.removeItem("Selected_Product_4_Trend");
-  localStorage.removeItem("Date_Wise_Trend");  
+  localStorage.removeItem("Date_Wise_Trend");
+  localStorage.removeItem("Heat_Map_Data");  
 };
 var mount_data = true;
 export default class Dashboard extends Component {
@@ -171,7 +179,7 @@ export default class Dashboard extends Component {
                 type: 'pie',
                 radius: '55%',
                 center: ['50%', '50%'],
-                color:['red','green'],
+                color: ['red', 'green'],
                 data: series_data,
                 itemStyle: {
                   emphasis: {
@@ -242,7 +250,7 @@ export default class Dashboard extends Component {
                 type: 'bar',
                 stack: 'two',
                 itemStyle: itemStyle,
-                color:['Green'],                
+                color: ['Green'],
                 data: pass_data
               },
               {
@@ -250,7 +258,7 @@ export default class Dashboard extends Component {
                 type: 'bar',
                 stack: 'two',
                 itemStyle: itemStyle,
-                color:['red'],                                
+                color: ['red'],
                 data: fail_data
               }
             ]
