@@ -239,7 +239,9 @@ export default class Dashboard extends Component {
             },
             yAxis: {
               inverse: false,
-              splitArea: { show: false }
+              splitArea: { show: false },
+              min : 0,
+              max : 30
             },
             grid: {
               left: 100
@@ -287,7 +289,7 @@ export default class Dashboard extends Component {
           <Col xs="12" sm="12" lg="4">
             <Card>
               <CardHeader>
-                Overall Status
+                <strong>Overall Status</strong>
                 <div className="card-actions">
                   <a onClick={this.toggle_pie}>
                     <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
@@ -318,7 +320,7 @@ export default class Dashboard extends Component {
           <Col xs="12" sm="12" lg="8">
             <Card>
               <CardHeader>
-                Weekly Status
+                <strong>Weekly Status (Last 7 Days)</strong>
                 <div className="card-actions">
                   <a onClick={this.toggle_bar}>
                     <i className="fa fa-expand fa-lg" tooltip="Expand"></i>

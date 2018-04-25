@@ -120,8 +120,8 @@ export default class Over_all_status extends Component {
     var color_depends_status2;
     if (Title_Value == "Pass") {
       color_depends_status = ['Green'];
-      color_depends_status1 = ['Cyan'];
-      color_depends_status2 = ['Blue'];
+      color_depends_status1 = ['#61FC63'];
+      color_depends_status2 = ['#029A05'];
     }
     else {
       color_depends_status = ['Red'];
@@ -166,7 +166,6 @@ export default class Over_all_status extends Component {
       },
       tooltip: {},
       xAxis: {
-        name: 'X Axis',
         silent: false,
         axisLine: { onZero: true },
         splitLine: { show: false },
@@ -175,7 +174,9 @@ export default class Over_all_status extends Component {
       yAxis: {
         data: legend_data1,
         inverse: false,
-        splitArea: { show: false }
+        splitArea: { show: false },
+        min : 0,
+        max : 30
       },
       grid: {
         left: 100
@@ -247,7 +248,9 @@ export default class Over_all_status extends Component {
       ],
       yAxis: [
         {
-          type: 'value'
+          type: 'value',
+          min : 0,
+          max :30
         }
       ],
       series: [

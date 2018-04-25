@@ -114,7 +114,6 @@ export default class Product_Wise extends Component {
         axisPointer: {
           type: 'shadow'
         },
-        name: 'X Axis',
         silent: false,
         axisLine: { onZero: true },
         splitLine: { show: false },
