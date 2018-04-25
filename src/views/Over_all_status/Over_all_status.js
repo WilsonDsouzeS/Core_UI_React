@@ -278,9 +278,10 @@ export default class Over_all_status extends Component {
       ]
     };
 
+    var Failure_Trend_Data = JSON.parse(localStorage.getItem("Failure_Trend_Data"));
+
     // Trend for failure secnario
-    if (Product_Name != null) {
-      var Failure_Trend_Data = JSON.parse(localStorage.getItem("Failure_Trend_Data"));
+    if (Product_Name != null && Failure_Trend_Data!=null) {
       var new_array = Failure_Trend_Data.filter(
         function (el) {
           return el.ProductName == Product_Name
@@ -506,7 +507,7 @@ export default class Over_all_status extends Component {
             <Col xs="12" lg="12">
             <Card>
               <CardHeader>
-                <h2>Failure Trend</h2>
+                <strong>{Product_Name}</strong>
               </CardHeader>
               <CardBody>
                 <Row>
