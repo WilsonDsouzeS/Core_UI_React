@@ -175,8 +175,6 @@ export default class Over_all_status extends Component {
         data: legend_data1,
         inverse: false,
         splitArea: { show: false },
-        min : 0,
-        max : 30
       },
       grid: {
         left: 100
