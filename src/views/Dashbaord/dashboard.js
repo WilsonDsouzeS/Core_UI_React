@@ -113,8 +113,7 @@ function onChartReady(echarts) {
   localStorage.removeItem("Product_wise_overall");
   localStorage.removeItem("Selected_Date_4_Trend");
   localStorage.removeItem("Selected_Product_4_Trend");
-  localStorage.removeItem("Date_Wise_Trend");
-  localStorage.removeItem("Failure_Trend_Data");  
+  localStorage.removeItem("Date_Wise_Trend");  
 };
 var mount_data = true;
 export default class Dashboard extends Component {
@@ -239,9 +238,7 @@ export default class Dashboard extends Component {
             },
             yAxis: {
               inverse: false,
-              splitArea: { show: false },
-              min : 0,
-              max : 30
+              splitArea: { show: false }
             },
             grid: {
               left: 100
@@ -289,7 +286,7 @@ export default class Dashboard extends Component {
           <Col xs="12" sm="12" lg="4">
             <Card>
               <CardHeader>
-                <strong>Overall Status</strong>
+                <strong>Test Results: Overall</strong>
                 <div className="card-actions">
                   <a onClick={this.toggle_pie}>
                     <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
@@ -307,7 +304,7 @@ export default class Dashboard extends Component {
             </Card>
             <Modal isOpen={this.state.pie} toggle={this.toggle_pie}
               className={'modal-lg ' + this.props.className}>
-              <ModalHeader toggle={this.toggle_pie}>Overall Status</ModalHeader>
+              <ModalHeader toggle={this.toggle_pie}><strong>Test Results: Overall</strong></ModalHeader>
               <ModalBody>
                 <ReactEcharts
                   option={pie_getOption}
@@ -320,7 +317,7 @@ export default class Dashboard extends Component {
           <Col xs="12" sm="12" lg="8">
             <Card>
               <CardHeader>
-                <strong>Weekly Status (Last 7 Days)</strong>
+                <strong>Test Results (Last 7 Days)</strong>
                 <div className="card-actions">
                   <a onClick={this.toggle_bar}>
                     <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
@@ -338,7 +335,7 @@ export default class Dashboard extends Component {
             </Card>
             <Modal isOpen={this.state.bar} toggle={this.toggle_bar}
               className={'modal-lg ' + this.props.className}>
-              <ModalHeader toggle={this.toggle_bar}>Weekly Status</ModalHeader>
+              <ModalHeader toggle={this.toggle_bar}><strong>Test Results (Last 7 Days)</strong></ModalHeader>
               <ModalBody>
                 <ReactEcharts
                   option={bar_getoption}

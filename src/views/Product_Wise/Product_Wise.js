@@ -64,32 +64,56 @@ export default class Product_Wise extends Component {
     var Last_7_Days_API_Responce = JSON.parse(localStorage.getItem("Last_7_Days_API_Responce"));
     var legend_data2 = [];
     var series_data2 = [];
-    var series_data_product1 = [];
-    var series_data_product2 = [];
     for (var i = 0; i < Last_7_Days_API_Responce.length; i++) {
       legend_data2[i] = Last_7_Days_API_Responce[i][0];
       series_data2[i] = Last_7_Days_API_Responce[i][1][0];
     }
-    for (var j = 0; j < series_data2.length; j++) {
-      if (Title_Value == "Pass") {
-        for (var k = 0; k < series_data2[j].length; k++) {
-          if (series_data2[j][k].ProductName == Title_Key)
-            series_data_product1 = series_data_product1.concat(series_data2[j][k].PassCnt);
-          if (series_data2[j][k].ProductName == null)
-            series_data_product1 = series_data_product1.concat("0");
-        }
-      }
-      else if (Title_Value == "Fail") {
-        for (var k = 0; k < series_data2[j].length; k++) {
-          if (series_data2[j][k].ProductName == Title_Key)
-            series_data_product1 = series_data_product1.concat(series_data2[j][k].FailCnt);
-          if (series_data2[j][k].ProductName == null)
-            series_data_product1 = series_data_product1.concat("0");
-        }
+    var product_list = [];
+    var final_data = [];
+    for (var p = 0; p < series_data2.length; p++) {
+      for (var q = 0; q < series_data2[p].length; q++) {
+        product_list = product_list.concat(series_data2[p][q].ProductKey);   //Changing Name to Key
+        product_list = product_list.filter(function (e) { return e });  //Excludes Null
+        product_list = product_list.filter(function (item, index, inputArray) {
+          return inputArray.indexOf(item) == index;
+        });
       }
     }
+
+    for (var r = 0; r < product_list.length; r++) {
+      var series_data_product_each = [0, 0, 0, 0, 0, 0, 0];
+      for (var j = 0; j < series_data2.length; j++) {
+        if (Title_Value == "Pass") {
+          for (var k = 0; k < series_data2[j].length; k++) {
+            if (series_data2[j][k].ProductKey == product_list[r])
+              series_data_product_each[j] = series_data2[j][k].PassCnt;
+            //series_data_product_each = series_data_product_each.concat(series_data2[j][k].PassCnt);
+            else if (series_data2[j][k].ProductKey == null)
+              series_data_product_each[j] = 0;
+            final_data[r] = series_data_product_each;
+          }
+        }
+        else if (Title_Value == "Fail") {
+          for (var k = 0; k < series_data2[j].length; k++) {
+            if (series_data2[j][k].ProductKey == product_list[r])
+              series_data_product_each = series_data_product_each.concat(series_data2[j][k].FailCnt);
+            else if (series_data2[j][k].ProductKey == null)
+              series_data_product_each = series_data_product_each.concat("0");
+            final_data[r] = series_data_product_each;
+          }
+        }
+      }
+      if(product_list[r]==Title_Key)
+      {
+        var very_final_data=final_data[r];
+      }
+    }
+
+    console.log(product_list);    
+    console.log(final_data);
+    console.log(Last_7_Days_API_Responce);
     console.log(legend_data2);
-    console.log(series_data_product1);
+    console.log(very_final_data);
 
     var itemStyle = {
       normal: {
@@ -130,18 +154,8 @@ export default class Product_Wise extends Component {
         {
           name: Title_Key,
           type: 'bar',
-          data: series_data_product1,
-          color: color_depends_status,
-          markLine: {
-            lineStyle: {
-              normal: {
-                type: 'dashed'
-              }
-            },
-            data: [
-              [{ type: 'min' }, { type: 'max' }]
-            ]
-          }
+          data: very_final_data,
+          color: color_depends_status
         }
       ]
     };
@@ -156,7 +170,7 @@ export default class Product_Wise extends Component {
             <Card>
               <CardHeader>
                 <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
-                <strong>{Title_Key} - {Title_Value}</strong>
+                <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
                 <div className="card-actions">
                   <a onClick={this.toggle_overall_bar}>
                     <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
@@ -184,7 +198,7 @@ export default class Product_Wise extends Component {
             <Modal isOpen={this.state.overall_bar} toggle={this.toggle_overall_bar}
               className={'modal-lg ' + this.props.className}>
               <ModalHeader toggle={this.toggle_overall_bar}>
-                <strong>{Title_Key} - {Title_Value}</strong>
+                <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
               </ModalHeader>
               <ModalBody>
                 <Table responsive striped>
@@ -209,7 +223,7 @@ export default class Product_Wise extends Component {
             <Card>
               <CardHeader>
                 <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
-                <strong>{Title_Key} - {Title_Value}</strong>
+                <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
                 <div className="card-actions">
                   <a onClick={this.toggle_last_7_bar}>
                     <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
@@ -227,7 +241,7 @@ export default class Product_Wise extends Component {
             <Modal isOpen={this.state.last_7_bar} toggle={this.toggle_last_7_bar}
               className={'modal-lg ' + this.props.className}>
               <ModalHeader toggle={this.toggle_last_7_bar}>
-                <strong>{Title_Key} - {Title_Value}</strong>
+                <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
               </ModalHeader>
               <ModalBody>
                 <ReactEcharts
