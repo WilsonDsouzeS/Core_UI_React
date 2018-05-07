@@ -10,6 +10,8 @@ import Dashboard from '../../views/Dashbaord/';
 import Trend_Chart from '../../views/Trend_Chart/';
 import Over_all_status from '../../views/Over_all_status/';
 import Product_Wise from '../../views/Product_Wise/';
+import Machines from '../../views/Machines/';
+import Machine_Details from '../../views/Machine_Details/';
 import Auth from '../../Auth/Auth';
 import Callback from '../../Callback/Callback';
 
@@ -35,7 +37,9 @@ class Full extends Component {
                 <Container fluid>
                   <Switch>
                     <Route path="/dashboard" name="Dashboard" component={Dashboard} />
-                    <Route path="/overall_status" name="Overall_status" component={Over_all_status} />    
+                    <Route path="/overall_status" name="Overall_status" component={Over_all_status} /> 
+                    <Route path="/machines" name="Machine" component={Machines} />
+                    <Route path="/machine_details" name="Machine_Details" component={Machine_Details} />       
                     <Route path="/product_wise" name="Product_Wise" component={Product_Wise} />                                                        
                     <Route path="/trend_chart" name="Trend_Chart" component={Trend_Chart} />
                     <Route path="/callback" name="Callback" component={Callback} render={(props) => {

@@ -42,7 +42,7 @@ var status_val;
 
 
 function onChartClick(param, echarts) {
-  if (param.name=="Fail" || param.seriesName=="Fail") {
+  if (param.name == "Fail" || param.seriesName == "Fail") {
     axios.get('http://192.168.20.26:5000/resultdetails/0')
       .then(function (response) {
         console.log(response.data.data);
@@ -113,7 +113,7 @@ function onChartReady(echarts) {
   localStorage.removeItem("Product_wise_overall");
   localStorage.removeItem("Selected_Date_4_Trend");
   localStorage.removeItem("Selected_Product_4_Trend");
-  localStorage.removeItem("Date_Wise_Trend");  
+  localStorage.removeItem("Date_Wise_Trend");
 };
 var mount_data = true;
 export default class Dashboard extends Component {
@@ -344,6 +344,35 @@ export default class Dashboard extends Component {
                   onEvents={onEvents} />
               </ModalBody>
             </Modal>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="12">
+            <Card>
+              <CardHeader>
+                <strong>MUT List</strong>
+                <div className="card-actions">
+                  <a onClick={this.toggle_pie}>
+                    <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
+                  </a>
+                </div>
+              </CardHeader>
+              <CardBody>
+              <Col lg="4">
+                <Link to="/machines">
+                  <Card className="text-white bg-danger">
+                    <CardBody className="pb-0">
+                      <h4 className="mb-0">6</h4>
+                      <p>Total Machines</p>
+                    </CardBody>
+                   {/*  <div className="chart-wrapper px-3" style={{ height: '70px' }}>    {// Chart inside the card}
+                      <Line data={cardChartData1} options={cardChartOpts1} height={70} />
+                    </div> */}
+                  </Card>
+                </Link>
+                </Col>
+              </CardBody>
+            </Card>
           </Col>
         </Row>
       </div>
