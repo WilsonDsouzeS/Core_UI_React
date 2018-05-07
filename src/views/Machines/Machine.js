@@ -22,9 +22,9 @@ class Machines extends Component {
       data:
         [
           {
-            "m_id": "Machine-001",
-            "operation": "Bush Assembly",
-            "status": "Running",
+            "m_id": "MUT-11",
+            "operation": "EOLT",
+            "status": "xxxx",
             "current_unit": "300",
             "quality_target": "350",
             "product":"Oil Pump",
@@ -38,9 +38,9 @@ class Machines extends Component {
             "production_capacity":"400"
           },
           {
-            "m_id": "Machine-002",
-            "operation": "Bearing Assembly",
-            "status": "Running",
+            "m_id": "MUT-12",
+            "operation": "EOLT",
+            "status": "xxxx",
             "current_unit": "732",
             "quality_target": "1400",
             "product":"Gear Pump",
@@ -54,9 +54,9 @@ class Machines extends Component {
             "production_capacity":"1500"
           },
           {
-            "m_id": "Machine-003",
-            "operation": "Dowel Assembly",
-            "status": "Disturbance Over Change",
+            "m_id": "MUT-13",
+            "operation": "EOLT",
+            "status": "xxxx",
             "current_unit": "50",
             "quality_target": "150",
             "product":"Screw Pump",
@@ -70,9 +70,9 @@ class Machines extends Component {
             "production_capacity":"190"
           },
           {
-            "m_id": "Machine-004",
-            "operation": "Screw Assembly",
-            "status": "Disturbance Not Coded",
+            "m_id": "MUT-14",
+            "operation": "EOLT",
+            "status": "xxxx",
             "current_unit": "35",
             "quality_target": "350",
             "product":"Piston Pump",
@@ -86,9 +86,9 @@ class Machines extends Component {
             "production_capacity":"400"
           },
           {
-            "m_id": "Machine-005",
-            "operation": "O-Ring Assembly",
-            "status": "Running",
+            "m_id": "MUT-15",
+            "operation": "EOLT",
+            "status": "xxxx",
             "current_unit": "1000",
             "quality_target": "3500",
             "product":"Rotary Vane Pump",
@@ -102,9 +102,9 @@ class Machines extends Component {
             "production_capacity":"3900"
           },
           {
-            "m_id": "Machine-006",
+            "m_id": "MUT-16",
             "operation": "EOLT",
-            "status": "Not Running",
+            "status": "xxxx",
             "current_unit": "3000",
             "quality_target": "3500",
             "product":"Rope Pump",
