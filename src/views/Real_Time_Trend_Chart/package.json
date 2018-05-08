@@ -1,0 +1,6 @@
+{
+  "name": "Real_Time_Trend_chart",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Real_Time_Trend_chart.js"
+}

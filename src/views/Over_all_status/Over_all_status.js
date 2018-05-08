@@ -282,10 +282,12 @@ export default class Over_all_status extends Component {
     var Failure_Trend_Data = JSON.parse(localStorage.getItem("Failure_Trend_Data"));
 
     // Trend for failure secnario
+    console.log(Product_Name);
+    console.log(Failure_Trend_Data);
     if (Product_Name != null && Failure_Trend_Data != null) {
       var new_array = Failure_Trend_Data.filter(
         function (el) {
-          return el.ProductName == Product_Name
+          return el.ProductNo == Product_Name
         });
         console.log(new_array);
       var CTDB = [];

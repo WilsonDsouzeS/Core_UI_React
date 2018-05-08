@@ -3,18 +3,18 @@ export default {
     {
       name: 'Home',
       url: '/dashboard',
-      icon: 'icon-speedometer',
-    }/* ,
-    {
-      name: 'ECharts',
-      url: '/echarts',
-      icon: 'icon-pie-chart'
+      icon: 'icon-home',
     },
     {
-      name: 'Machines',
+      name: 'Real-Time Data',
       url: '/machines',
-      icon: 'icon-puzzle'
+      icon: 'icon-speedometer'
     },
+    {
+      name: 'Historical Data',
+      url: '/historical_main',
+      icon: 'icon-puzzle'
+    }/*,
     {
       name: 'MQTT-Test',
       url: '/mqtt_test',

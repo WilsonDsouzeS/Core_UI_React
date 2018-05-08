@@ -212,7 +212,7 @@ class Machine_Details extends Component {
                   </Col>
                   <Col xs="12" sm="3" className="text-center">
                     <CardBody>
-                      <Link to="/trend_chart">
+                      <Link to="/real_time_trend_chart">
                         <Button outline color="primary" size="lg">Trend Chart <br /> <i className="fa fa-line-chart fa-lg fa-2x"></i></Button>
                       </Link>
                     </CardBody>
