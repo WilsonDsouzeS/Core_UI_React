@@ -117,6 +117,130 @@ function onChartReady(echarts) {
   localStorage.removeItem("Failure_Trend_Data");
 };
 var mount_data = true;
+if(mount_data) {
+  axios.get('http://192.168.20.26:5000/summary')
+    .then(function (response) {
+      var result = response.data.data;
+      for (var i = 0; i < result.length; i++) {
+        legend_data[i] = result[i].Result;
+        series_data[i] = {};
+        series_data[i].value = result[i].Count;
+        series_data[i].name = result[i].Result;
+        api_result = true;
+      }
+    })
+    .then(function () {
+      pie_getOption = {
+        title: {
+          //text: 'Overall Status',
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          //orient: 'vertical',
+          //left: 'left',
+          y: 'bottom',
+          data: legend_data
+        },
+        series: [
+          {
+            name: 'Overall_Status',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '50%'],
+            color: ['red', 'green'],
+            data: series_data,
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0
+                //shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      };
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  axios.get('http://192.168.20.26:5000/datewiseresult')
+    .then(function (response) {
+      var result = response.data.data;
+      for (var i = 0; i < result.length; i++) {
+        last_7_days[i] = result[i].ResultDate;
+        pass_data[i] = result[i].PassCnt;
+        fail_data[i] = result[i].FailCnt;
+        api_result1 = true;
+      }
+    })
+    .then(function () {
+      var itemStyle = {
+        normal: {
+        },
+        emphasis: {
+          barBorderWidth: 2,
+          shadowBlur: 20,
+          shadowOffsetX: 0,
+          shadowOffsetY: 0,
+          shadowColor: 'rgba(25,60,85,92)'
+        }
+      };
+
+      bar_getoption = {
+        //backgroundColor: '#eee',
+        legend: {
+          data: ['Fail', 'Pass'],
+          y: 'bottom'
+        },
+        tooltip: {},
+        xAxis: {
+          data: last_7_days,
+          name: 'X Axis',
+          silent: false,
+          axisLine: { onZero: true },
+          splitLine: { show: false },
+          splitArea: { show: false }
+        },
+        yAxis: {
+          inverse: false,
+          splitArea: { show: false }
+        },
+        grid: {
+          left: 100
+        },
+        series: [
+          {
+            name: 'Pass',
+            type: 'bar',
+            stack: 'two',
+            itemStyle: itemStyle,
+            color: ['Green'],
+            data: pass_data
+          },
+          {
+            name: 'Fail',
+            type: 'bar',
+            stack: 'two',
+            itemStyle: itemStyle,
+            color: ['red'],
+            data: fail_data
+          }
+        ]
+      };
+    })
+    .then(function () {
+      mount_data = false;
+      window.location.href = "#";
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -126,8 +250,6 @@ export default class Dashboard extends Component {
     };
     this.toggle_pie = this.toggle_pie.bind(this);
     this.toggle_bar = this.toggle_bar.bind(this);
-    this.onload_overall_chart_data = this.onload_overall_chart_data.bind(this);
-    this.onload_weekly_chart_data = this.onload_weekly_chart_data.bind(this);
   }
   toggle_pie() {
     this.setState({
@@ -139,141 +261,6 @@ export default class Dashboard extends Component {
       bar: !this.state.bar,
     });
   }
-
-  componentWillMount() {
-    this.onload_overall_chart_data()
-    this.onload_weekly_chart_data()
-  }
-  onload_overall_chart_data() {
-    if (mount_data) {
-      axios.get('http://192.168.20.26:5000/summary')
-        .then(function (response) {
-          var result = response.data.data;
-          for (var i = 0; i < result.length; i++) {
-            legend_data[i] = result[i].Result;
-            series_data[i] = {};
-            series_data[i].value = result[i].Count;
-            series_data[i].name = result[i].Result;
-            api_result = true;
-          }
-        })
-        .then(function () {
-          pie_getOption = {
-            title: {
-              //text: 'Overall Status',
-              x: 'center'
-            },
-            tooltip: {
-              trigger: 'item',
-              formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-            legend: {
-              //orient: 'vertical',
-              //left: 'left',
-              y: 'bottom',
-              data: legend_data
-            },
-            series: [
-              {
-                name: 'Overall_Status',
-                type: 'pie',
-                radius: '55%',
-                center: ['50%', '50%'],
-                color: ['red', 'green'],
-                data: series_data,
-                itemStyle: {
-                  emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0
-                    //shadowColor: 'rgba(0, 0, 0, 0.5)'
-                  }
-                }
-              }
-            ]
-          };
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  }
-  onload_weekly_chart_data() {
-    if (mount_data) {
-      axios.get('http://192.168.20.26:5000/datewiseresult')
-        .then(function (response) {
-          var result = response.data.data;
-          for (var i = 0; i < result.length; i++) {
-            last_7_days[i] = result[i].ResultDate;
-            pass_data[i] = result[i].PassCnt;
-            fail_data[i] = result[i].FailCnt;
-            api_result1 = true;
-          }
-        })
-        .then(function () {
-          var itemStyle = {
-            normal: {
-            },
-            emphasis: {
-              barBorderWidth: 2,
-              shadowBlur: 20,
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              shadowColor: 'rgba(25,60,85,92)'
-            }
-          };
-
-          bar_getoption = {
-            //backgroundColor: '#eee',
-            legend: {
-              data: ['Fail', 'Pass'],
-              y: 'bottom'
-            },
-            tooltip: {},
-            xAxis: {
-              data: last_7_days,
-              name: 'X Axis',
-              silent: false,
-              axisLine: { onZero: true },
-              splitLine: { show: false },
-              splitArea: { show: false }
-            },
-            yAxis: {
-              inverse: false,
-              splitArea: { show: false }
-            },
-            grid: {
-              left: 100
-            },
-            series: [
-              {
-                name: 'Pass',
-                type: 'bar',
-                stack: 'two',
-                itemStyle: itemStyle,
-                color: ['Green'],
-                data: pass_data
-              },
-              {
-                name: 'Fail',
-                type: 'bar',
-                stack: 'two',
-                itemStyle: itemStyle,
-                color: ['red'],
-                data: fail_data
-              }
-            ]
-          };
-        })
-        .then(function () {
-          mount_data = false;
-          window.location.href = "#";
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  }
-
   render() {
     if (this.state.redirect) {
       return <Redirect push to="/overall_status" />;

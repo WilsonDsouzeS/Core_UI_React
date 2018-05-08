@@ -152,13 +152,13 @@ class Machines extends Component {
     )
   }
 }
-var mqtt = require('mqtt');
+/* var mqtt = require('mqtt');
 var host = 'ws://192.168.20.144:9093/mqtt';
 var client = mqtt.connect(host);
 var subscribed_data;
 client.on('connect', function () {
   client.subscribe("production_line");
-});
+}); */
 class TableRow extends React.Component {
   handleClick(mac_details, e) {
     localStorage.setItem("Machine_Id",mac_details.m_id);
@@ -195,7 +195,7 @@ class TableRow extends React.Component {
     
     var each_data = this.props.data;
     var myStyle;
-    client.on('message', function (topic, payload, packet) {
+    /* client.on('message', function (topic, payload, packet) {
       if (topic == "production_line") {
         subscribed_data = JSON.parse(payload.toString());
       }
@@ -209,7 +209,7 @@ class TableRow extends React.Component {
         Status_Val.innerHTML = "";
         Status_Val.innerHTML = subscribed_data.status;
       }
-    });
+    }); */
   return (
       <tr>
         <td ><Link to="/machine_details"><span id={each_data.m_id} onClick={this.handleClick.bind(this, each_data)}>{each_data.m_id}</span></Link></td>

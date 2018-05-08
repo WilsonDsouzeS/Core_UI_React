@@ -440,7 +440,7 @@ export default class Over_all_status extends Component {
           <Col xs="12" lg="4">
             <Card>
               <CardHeader>
-                <Link to="/dashboard"><i className="fa fa-arrow-circle-left"></i> Back</Link>
+                <Link to="/historical_main"><i className="fa fa-arrow-circle-left"></i> Back</Link>
                 <strong>{Title_Value} Results: Part Wise</strong>
                 <div className="card-actions">
                   <a onClick={this.toggle_overall_bar}>
@@ -473,7 +473,7 @@ export default class Over_all_status extends Component {
           <Col xs="12" lg="8">
             <Card>
               <CardHeader>
-                <Link to="/dashboard"><i className="fa fa-arrow-circle-left"></i> Back</Link>
+                <Link to="/historical_main"><i className="fa fa-arrow-circle-left"></i> Back</Link>
                 <strong>{Title_Value} Results: Part Wise (Last 7 Days)</strong>
                 <div className="card-actions">
                   <a onClick={this.toggle_last_7_bar}>

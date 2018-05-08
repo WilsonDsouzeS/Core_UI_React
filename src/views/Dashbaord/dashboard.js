@@ -130,7 +130,7 @@ export default class Dashboard extends Component {
           </Col>
           <Col xs="12" sm="12" lg="3">
             <Link to="/historical_main">
-            <Card className="text-white bg-warning">
+              <Card className="text-white bg-warning">
                 <CardBody className="pb-0">
                   <h4 className="mb-0">Historical</h4>
                   <p>Analysis and Reporting</p>
