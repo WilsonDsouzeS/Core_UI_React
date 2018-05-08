@@ -2,15 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Collapsible from 'react-collapsible';
 import {
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Table,
-  Collapse, Button, Fade, Modal, ModalHeader, ModalBody, ModalFooter
-} from 'reactstrap';
+  Row,  Col,  Card,  CardHeader,  CardBody,  CardFooter,  Table,  Collapse, Button, Fade, Modal, ModalHeader,
+  ModalBody, ModalFooter,Pagination,  PaginationItem,  PaginationLink } from 'reactstrap';
 import ReactEcharts from 'echarts-for-react';
 import axios from 'axios';
 
@@ -29,7 +22,9 @@ function onChartClick(param, echarts) {
     });
   console.log(new_array);
   localStorage.setItem("Date_Wise_Trend", JSON.stringify(new_array));
-  window.location = '/#/trend_Chart';
+  var Trend_Comes_From="product_wise"
+  localStorage.setItem("Trend_Comes_From",Trend_Comes_From );
+  window.location = '/#/trend_Chart1';
 };
 export default class Product_Wise extends Component {
   constructor(props) {
@@ -193,6 +188,26 @@ export default class Product_Wise extends Component {
                     {this.state1.map((data, i) => <TableRow key={i} data={data} />)}
                   </tbody>
                 </Table>
+                <Pagination>
+                  <PaginationItem>
+                    <PaginationLink previous href="#"></PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem active>
+                    <PaginationLink href="#">1</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">2</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">3</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">4</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink next href="#"></PaginationLink>
+                  </PaginationItem>
+                </Pagination>
               </CardBody>
             </Card>
             <Modal isOpen={this.state.overall_bar} toggle={this.toggle_overall_bar}
@@ -216,6 +231,26 @@ export default class Product_Wise extends Component {
                     {this.state1.map((data, i) => <TableRow key={i} data={data} />)}
                   </tbody>
                 </Table>
+                <Pagination>
+                  <PaginationItem>
+                    <PaginationLink previous href="#"></PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem active>
+                    <PaginationLink href="#">1</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">2</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">3</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">4</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink next href="#"></PaginationLink>
+                  </PaginationItem>
+                </Pagination>
               </ModalBody>
             </Modal>
           </Col>

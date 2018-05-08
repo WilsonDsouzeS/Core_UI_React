@@ -112,6 +112,32 @@ const cardChartOpts2 = {
 
 export default class Dashboard extends Component {
   render() {
+    localStorage.removeItem("Machine_Id");
+    localStorage.removeItem("Status");    
+    localStorage.removeItem("Current_Unit");
+    localStorage.removeItem("Quality_Target"); 
+    localStorage.removeItem("Product");
+    localStorage.removeItem("Station");
+    localStorage.removeItem("Shift"); 
+    localStorage.removeItem("Part_No");
+    localStorage.removeItem("Order_No");
+    localStorage.removeItem("Available_Time");
+    localStorage.removeItem("Running_Time"); 
+    localStorage.removeItem("Good_Parts");
+    localStorage.removeItem("Rejected_Parts");
+    localStorage.removeItem("Production_Capacity"); 
+    localStorage.removeItem("Overall_Product_API_Responce");
+    localStorage.removeItem("Last_7_Days_API_Responce");
+    localStorage.removeItem("Title_Key");
+    localStorage.removeItem("Title_Value");
+    localStorage.removeItem("Product_Status");
+    localStorage.removeItem("Product_Name");
+    localStorage.removeItem("Product_wise_overall");
+    localStorage.removeItem("Selected_Date_4_Trend");
+    localStorage.removeItem("Selected_Product_4_Trend");
+    localStorage.removeItem("Date_Wise_Trend");
+    localStorage.removeItem("Failure_Trend_Data");
+    localStorage.removeItem("Trend_Comes_From");
     return (
       <div className="animated fadeIn">
         <Row>

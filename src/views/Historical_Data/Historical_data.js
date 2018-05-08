@@ -104,17 +104,7 @@ function onChartClick(param, echarts) {
 };
 
 function onChartReady(echarts) {
-  localStorage.removeItem("Overall_Product_API_Responce");
-  localStorage.removeItem("Last_7_Days_API_Responce");
-  localStorage.removeItem("Title_Key");
-  localStorage.removeItem("Title_Value");
-  localStorage.removeItem("Product_Status");
-  localStorage.removeItem("Product_Name");
-  localStorage.removeItem("Product_wise_overall");
-  localStorage.removeItem("Selected_Date_4_Trend");
-  localStorage.removeItem("Selected_Product_4_Trend");
-  localStorage.removeItem("Date_Wise_Trend");
-  localStorage.removeItem("Failure_Trend_Data");
+  console.log(echarts);
 };
 var mount_data = true;
 if(mount_data) {

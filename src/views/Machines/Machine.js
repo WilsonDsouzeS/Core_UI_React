@@ -29,7 +29,7 @@ class Machines extends Component {
             "quality_target": "350",
             "product":"Oil Pump",
             "shift": "1",
-            "part_no":"152-5647O",
+            "part_no":"403285",
             "order_no":"21751",
             "available_time":"420 Min",
             "good_parts":"280",
@@ -45,7 +45,7 @@ class Machines extends Component {
             "quality_target": "1400",
             "product":"Gear Pump",
             "shift": "2",
-            "part_no":"136-8540G",
+            "part_no":"403285",
             "order_no":"21752",
             "available_time":"1500 Min",
             "good_parts":"702",
@@ -61,7 +61,7 @@ class Machines extends Component {
             "quality_target": "150",
             "product":"Screw Pump",
             "shift": "3",
-            "part_no":"856-79455S",
+            "part_no":"403285",
             "order_no":"21753",
             "available_time":"300 Min",
             "good_parts":"49",
@@ -77,7 +77,7 @@ class Machines extends Component {
             "quality_target": "350",
             "product":"Piston Pump",
             "shift": "3",
-            "part_no":"965-78985P",
+            "part_no":"403285",
             "order_no":"21754",
             "available_time":"420 Min",
             "good_parts":"35",
@@ -93,7 +93,7 @@ class Machines extends Component {
             "quality_target": "3500",
             "product":"Rotary Vane Pump",
             "shift": "2",
-            "part_no":"852-78451R",
+            "part_no":"403285",
             "order_no":"21755",
             "available_time":"4200 Min",
             "good_parts":"960",
@@ -109,7 +109,7 @@ class Machines extends Component {
             "quality_target": "3500",
             "product":"Rope Pump",
             "shift": "1",
-            "part_no":"125-74859R",
+            "part_no":"403285",
             "order_no":"21756",
             "available_time":"4000 Min",
             "good_parts":"2960",
@@ -178,20 +178,6 @@ class TableRow extends React.Component {
     client.unsubscribe("production_line");     
   }
   render() {
-    localStorage.removeItem("Machine_Id");
-    localStorage.removeItem("Status");    
-    localStorage.removeItem("Current_Unit");
-    localStorage.removeItem("Quality_Target"); 
-    localStorage.removeItem("Product");
-    localStorage.removeItem("Station");
-    localStorage.removeItem("Shift"); 
-    localStorage.removeItem("Part_No");
-    localStorage.removeItem("Order_No");
-    localStorage.removeItem("Available_Time");
-    localStorage.removeItem("Running_Time"); 
-    localStorage.removeItem("Good_Parts");
-    localStorage.removeItem("Rejected_Parts");
-    localStorage.removeItem("Production_Capacity");  
     
     var each_data = this.props.data;
     var myStyle;

@@ -45,6 +45,7 @@ class Full extends Component {
                     <Route path="/machine_details" name="Machine_Details" component={Machine_Details} />       
                     <Route path="/product_wise" name="Product_Wise" component={Product_Wise} />                                                        
                     <Route path="/trend_chart" name="Trend_Chart" component={Trend_Chart} />
+                    <Route path="/trend_chart1" name="Trend_Chart" component={Trend_Chart} />
                     <Route path="/real_time_trend_chart" name="Real_Time_Trend_Chart" component={Real_Time_Trend_Chart} />
                     <Route path="/callback" name="Callback" component={Callback} render={(props) => {
                       handleAuthentication(props);

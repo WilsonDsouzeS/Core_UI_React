@@ -16,8 +16,9 @@ import ReactEcharts from 'echarts-for-react';
 
 class Trend_Chart extends Component {
   render() {
+    var Trend_Comes_From = localStorage.getItem("Trend_Comes_From");
     var trend_details = JSON.parse(localStorage.getItem("Date_Wise_Trend"));
-    var Product_Name = localStorage.getItem("Selected_Product_4_Trend");;
+    var Product_Name = localStorage.getItem("Selected_Product_4_Trend");
     var Selected_Date = localStorage.getItem("Selected_Date_4_Trend");
     var date = new Date();
     var c_month = date.getMonth() + 1;
@@ -163,7 +164,9 @@ class Trend_Chart extends Component {
           <Col xs="12" lg="12">
             <Card>
               <CardHeader>
-                <h2>Trend Chart - {Product_Name} - {Selected_Date}</h2>
+                <h2>{Product_Name} - Parameter Trends as on {Selected_Date}</h2>
+                {Trend_Comes_From=="overall_status" && (<Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>)}
+                {Trend_Comes_From=="product_wise" && (<Link to="/product_wise"><i className="fa fa-arrow-circle-left"></i> Back</Link>)}
                 <div className="pull-right">
                   Date :- {date.getDate() + "-" + c_month + "-" + date.getFullYear()} &nbsp; &nbsp;
                   Time :- {date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()}

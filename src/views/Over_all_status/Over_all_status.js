@@ -106,6 +106,8 @@ export default class Over_all_status extends Component {
           localStorage.setItem("Date_Wise_Trend", JSON.stringify(new_array));
         })
         .then(function () {
+          var Trend_Comes_From="overall_status"
+          localStorage.setItem("Trend_Comes_From",Trend_Comes_From );
           window.location = '/#/trend_Chart';
         });
     }
