@@ -164,7 +164,7 @@ class Trend_Chart extends Component {
           <Col xs="12" lg="12">
             <Card>
               <CardHeader>
-                <h2>{Product_Name} - Parameter Trends as on {Selected_Date}</h2>
+                <h2>{Product_Name} - Parameters Trend as on {Selected_Date}</h2>
                 {Trend_Comes_From=="overall_status" && (<Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>)}
                 {Trend_Comes_From=="product_wise" && (<Link to="/product_wise"><i className="fa fa-arrow-circle-left"></i> Back</Link>)}
                 <div className="pull-right">
