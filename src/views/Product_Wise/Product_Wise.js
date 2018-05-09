@@ -188,21 +188,6 @@ export default class Product_Wise extends Component {
                   nextPageText="Next"
                   prePageText="Prev"
                 />
-                {/* <Table responsive striped>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Product Name</th>
-                      <th>Product No</th>
-                      <th>Serial No</th>
-                      <th>Barcode</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state1.map((data, i) => <TableRow key={i} data={data} />)}
-                  </tbody>
-                </Table> */}
               </CardBody>
             </Card>
             <Modal isOpen={this.state.overall_bar} toggle={this.toggle_overall_bar}
@@ -219,21 +204,6 @@ export default class Product_Wise extends Component {
                   totalCount={this.state1.length}
                   arrayOption={[["size", 'all', ' ']]}
                 />
-                {/* <Table responsive striped>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Product Name</th>
-                      <th>Product No</th>
-                      <th>Serial No</th>
-                      <th>Barcode</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state1.map((data, i) => <TableRow key={i} data={data} />)}
-                  </tbody>
-                </Table> */}
               </ModalBody>
             </Modal>
           </Col>
@@ -272,21 +242,6 @@ export default class Product_Wise extends Component {
           </Col>
         </Row>
       </div>
-    );
-  }
-}
-class TableRow extends React.Component {
-  render() {
-    var Product_wise_all_data = this.props;
-    return (
-      <tr>
-        <td >{Product_wise_all_data.data.ResultDate}</td>
-        <td >{Product_wise_all_data.data.ResultTime}</td>
-        <td >{Product_wise_all_data.data.ProductName}</td>
-        <td >{Product_wise_all_data.data.ProductNo}</td>
-        <td >{Product_wise_all_data.data.SerialNo}</td>
-        <td >{Product_wise_all_data.data.Barcode}</td>
-      </tr >
     );
   }
 }
