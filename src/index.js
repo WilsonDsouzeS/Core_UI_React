@@ -18,9 +18,7 @@ import '../scss/core/_dropdown-menu-right.scss'
 // Containers
 import Full from './containers/Full/'
 const auth = new Auth();
-console.log(auth.isAuthenticated());
 setTimeout(() => {
-  console.log(auth.isAuthenticated());
   if (auth.isAuthenticated() != true) {
     auth.login();
     auth.handleAuthentication();

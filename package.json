@@ -49,6 +49,7 @@
     "react-delay": "^0.1.0",
     "react-dom": "16.2.0",
     "react-http-request": "^1.0.4",
+    "react-pagination-table": "^2.0.2",
     "react-responsive-accordion": "^1.0.0",
     "react-router-dom": "4.2.2",
     "react-transition-group": "2.2.1",

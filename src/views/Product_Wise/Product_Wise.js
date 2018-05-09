@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Collapsible from 'react-collapsible';
+import { TablePagination } from 'react-pagination-table';
 import {
-  Row,  Col,  Card,  CardHeader,  CardBody,  CardFooter,  Table,  Collapse, Button, Fade, Modal, ModalHeader,
-  ModalBody, ModalFooter,Pagination,  PaginationItem,  PaginationLink } from 'reactstrap';
+  Row, Col, Card, CardHeader, CardBody, CardFooter, Table, Collapse, Button, Fade, Modal, ModalHeader,
+  ModalBody, ModalFooter
+} from 'reactstrap';
 import ReactEcharts from 'echarts-for-react';
 import axios from 'axios';
 
@@ -22,8 +23,8 @@ function onChartClick(param, echarts) {
     });
   console.log(new_array);
   localStorage.setItem("Date_Wise_Trend", JSON.stringify(new_array));
-  var Trend_Comes_From="product_wise"
-  localStorage.setItem("Trend_Comes_From",Trend_Comes_From );
+  var Trend_Comes_From = "product_wise"
+  localStorage.setItem("Trend_Comes_From", Trend_Comes_From);
   window.location = '/#/trend_Chart1';
 };
 export default class Product_Wise extends Component {
@@ -49,6 +50,7 @@ export default class Product_Wise extends Component {
   }
 
   render() {
+    console.log(this.state1);
     var Title_Key = localStorage.getItem("Product_Name");
     var Title_Value = localStorage.getItem("Product_Status");
     var color_depends_status;
@@ -98,13 +100,12 @@ export default class Product_Wise extends Component {
           }
         }
       }
-      if(product_list[r]==Title_Key)
-      {
-        var very_final_data=final_data[r];
+      if (product_list[r] == Title_Key) {
+        var very_final_data = final_data[r];
       }
     }
 
-    console.log(product_list);    
+    console.log(product_list);
     console.log(final_data);
     console.log(Last_7_Days_API_Responce);
     console.log(legend_data2);
@@ -158,6 +159,7 @@ export default class Product_Wise extends Component {
     let onEvents = {
       'click': onChartClick
     };
+    var Header = ['Date', 'Time', 'Product Name', 'Product No', 'Serial No', 'Barcode'];
     return (
       <div className="animated fadeIn">
         <Row>
@@ -173,7 +175,20 @@ export default class Product_Wise extends Component {
                 </div>
               </CardHeader>
               <CardBody>
-                <Table responsive striped>
+                <TablePagination
+                  className="react-pagination-table"
+                  paginationClassName= "pagination-status"
+                  headers={Header}
+                  data={this.state1}
+                  columns="ResultDate.ResultTime.ProductName.ProductNo.SerialNo.Barcode"
+                  perPageItemCount={10}
+                  partialPageCount={ 3 }
+                  totalCount={this.state1.length}
+                  arrayOption={[["size", 'all', ' ']]}
+                  nextPageText="Next"
+                  prePageText="Prev"
+                />
+                {/* <Table responsive striped>
                   <thead>
                     <tr>
                       <th>Date</th>
@@ -187,27 +202,7 @@ export default class Product_Wise extends Component {
                   <tbody>
                     {this.state1.map((data, i) => <TableRow key={i} data={data} />)}
                   </tbody>
-                </Table>
-                <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous href="#"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next href="#"></PaginationLink>
-                  </PaginationItem>
-                </Pagination>
+                </Table> */}
               </CardBody>
             </Card>
             <Modal isOpen={this.state.overall_bar} toggle={this.toggle_overall_bar}
@@ -216,7 +211,15 @@ export default class Product_Wise extends Component {
                 <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
               </ModalHeader>
               <ModalBody>
-                <Table responsive striped>
+                <TablePagination
+                  headers={Header}
+                  data={this.state1}
+                  columns="ResultDate.ResultTime.ProductName.ProductNo.SerialNo.Barcode"
+                  perPageItemCount={10}
+                  totalCount={this.state1.length}
+                  arrayOption={[["size", 'all', ' ']]}
+                />
+                {/* <Table responsive striped>
                   <thead>
                     <tr>
                       <th>Date</th>
@@ -230,27 +233,7 @@ export default class Product_Wise extends Component {
                   <tbody>
                     {this.state1.map((data, i) => <TableRow key={i} data={data} />)}
                   </tbody>
-                </Table>
-                <Pagination>
-                  <PaginationItem>
-                    <PaginationLink previous href="#"></PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem active>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">2</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">4</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink next href="#"></PaginationLink>
-                  </PaginationItem>
-                </Pagination>
+                </Table> */}
               </ModalBody>
             </Modal>
           </Col>
