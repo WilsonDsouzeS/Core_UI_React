@@ -7,6 +7,10 @@ import {
 } from 'reactstrap';
 import ReactEcharts from 'echarts-for-react';
 import axios from 'axios';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import BootstrapTable from 'react-bootstrap-table-next';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 
 function onChartReady(echarts) {
   console.log('echart is ready');
@@ -158,8 +162,26 @@ export default class Product_Wise extends Component {
 
     let onEvents = {
       'click': onChartClick
-    };
-    var Header = ['Date', 'Time', 'Product Name', 'Product No', 'Serial No', 'Barcode'];
+    };   
+    var columns = [{
+      dataField: 'ResultDate',
+      text: 'Date'
+    }, {
+      dataField: 'ResultTime',
+      text: 'Time'
+    }, {
+      dataField: 'ProductName',
+      text: 'Product Name'
+    }, {
+      dataField: 'ProductNo',
+      text: 'Product No'
+    }, {
+      dataField: 'SerialNo',
+      text: 'Serial No'
+    }, {
+      dataField: 'Barcode',
+      text: 'Barcode'
+    }];
     return (
       <div className="animated fadeIn">
         <Row>
@@ -175,19 +197,7 @@ export default class Product_Wise extends Component {
                 </div>
               </CardHeader>
               <CardBody>
-                <TablePagination
-                  className="react-pagination-table"
-                  paginationClassName= "pagination-status"
-                  headers={Header}
-                  data={this.state1}
-                  columns="ResultDate.ResultTime.ProductName.ProductNo.SerialNo.Barcode"
-                  perPageItemCount={10}
-                  partialPageCount={ 3 }
-                  totalCount={this.state1.length}
-                  arrayOption={[["size", 'all', ' ']]}
-                  nextPageText="Next"
-                  prePageText="Prev"
-                />
+                <BootstrapTable keyField='ResultTime' data={this.state1} columns={columns} pagination={paginationFactory()} />
               </CardBody>
             </Card>
             <Modal isOpen={this.state.overall_bar} toggle={this.toggle_overall_bar}
@@ -196,14 +206,7 @@ export default class Product_Wise extends Component {
                 <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
               </ModalHeader>
               <ModalBody>
-                <TablePagination
-                  headers={Header}
-                  data={this.state1}
-                  columns="ResultDate.ResultTime.ProductName.ProductNo.SerialNo.Barcode"
-                  perPageItemCount={10}
-                  totalCount={this.state1.length}
-                  arrayOption={[["size", 'all', ' ']]}
-                />
+              <BootstrapTable keyField='ResultTime' data={this.state1} columns={columns} pagination={paginationFactory()} />
               </ModalBody>
             </Modal>
           </Col>
