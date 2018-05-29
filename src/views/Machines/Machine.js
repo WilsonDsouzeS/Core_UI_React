@@ -175,7 +175,7 @@ class TableRow extends React.Component {
     localStorage.setItem("Good_Parts",mac_details.good_parts);
     localStorage.setItem("Rejected_Parts",mac_details.rejected_parts);   
     localStorage.setItem("Production_Capacity",mac_details.production_capacity);  
-    client.unsubscribe("production_line");     
+    //client.unsubscribe("production_line");     
   }
   render() {
     
