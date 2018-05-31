@@ -32,6 +32,7 @@ var series_data = [];
 var api_result = false;
 var pie_getOption = {};
 var bar_getoption = {};
+var twenty_four_chart_Option = {};
 var last_7_days = [];
 var pass_data = [];
 var fail_data = [];
@@ -113,10 +114,12 @@ export default class Historical_Data extends Component {
     this.state = {
       pie: false,
       bar: false,
-      mount_data: true
+      mount_data: true,
+      daily_24_hours_trend: false,
     };
     this.toggle_pie = this.toggle_pie.bind(this);
     this.toggle_bar = this.toggle_bar.bind(this);
+    this.toggle_24_hours_trend = this.toggle_24_hours_trend.bind(this);
     this.onload_overall_chart_data = this.onload_overall_chart_data.bind(this);
     this.onload_weekly_chart_data = this.onload_weekly_chart_data.bind(this);
   }
@@ -130,12 +133,56 @@ export default class Historical_Data extends Component {
       bar: !this.state.bar,
     });
   }
+  toggle_24_hours_trend() {
+    this.setState({
+      daily_24_hours_trend: !this.state.daily_24_hours_trend,
+    });
+  }
 
   componentWillMount() {
     this.onload_overall_chart_data()
     this.onload_weekly_chart_data()
+    console.log(Date.now());
+    twenty_four_chart_Option = {
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['Pass_Count', 'Fail_Count']
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ["12AM", "01AM", "02AM", "03AM", "04AM", "05AM", "06AM", "07AM", "08AM", "09AM", "10AM", "11AM", "12PM", "01PM", "02PM", "03PM", "04PM", "05PM", "06PM", "07PM", "08PM", "09PM", "10PM", "11PM", "12PM"]
+      },
+      yAxis: {
+        type: 'value',
+      },
+      series: [
+        {
+          name: 'Pass_Count',
+          type: 'line',
+          smooth: true,
+          color: "Green",
+          data: ['7', '8', '8', '6', '7', '9', '5', '6', '11', '7', '8', '6', '5', '7', '8', '5', '6', '7', '5', '7', '11', '5', '7', '11', '15']
+        },
+        {
+          name: 'Fail_Count',
+          type: 'line',
+          smooth: true,
+          color: "Red",
+          data: ['0', '0', '0', '1', '2', '0', '4', '0', '2', '2', '3', '0', '1', '0', '0', '1', '2', '0', '3', '0', '0', '4', '0', '3', '0']
+        }
+      ]
+    };;
   }
-
+  
   onload_overall_chart_data() {
     if (this.state.mount_data) {
       axios.get('http://192.168.20.26:5000/summary')
@@ -189,6 +236,7 @@ export default class Historical_Data extends Component {
         });
     }
   }
+  
   onload_weekly_chart_data() {
     if (this.state.mount_data) {
       axios.get('http://192.168.20.26:5000/datewiseresult')
@@ -270,6 +318,9 @@ export default class Historical_Data extends Component {
         }
       }, 200);
     }
+    setTimeout(() => {
+      this.componentWillMount();
+    }, 180000);
   }
 
   render() {
@@ -338,6 +389,39 @@ export default class Historical_Data extends Component {
               <ModalBody>
                 <ReactEcharts
                   option={bar_getoption}
+                  style={{ height: 600 }}
+                  onChartReady={onChartReady}
+                  onEvents={onEvents} />
+              </ModalBody>
+            </Modal>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12" sm="12" lg="12">
+            <Card>
+              <CardHeader>
+                <strong>24 Hours Trend</strong>
+                <div className="card-actions">
+                  <a onClick={this.toggle_24_hours_trend}>
+                    <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
+                  </a>
+                </div>
+              </CardHeader>
+              <CardBody>
+                {this.state.mount_data && (<div className="text-center" style={{ height: 190 }}><div className="text-center" style={{ marginTop: 150 }}><i className="fa fa-spinner fa-lg fa-spin fa-3x"></i></div></div>)}
+                {!this.state.mount_data && (<ReactEcharts
+                  option={twenty_four_chart_Option}
+                  style={{ height: 350 }}
+                  onChartReady={onChartReady}
+                  onEvents={onEvents} />)}
+              </CardBody>
+            </Card>
+            <Modal isOpen={this.state.daily_24_hours_trend} toggle={this.toggle_24_hours_trend}
+              className={'modal-lg ' + this.props.className}>
+              <ModalHeader toggle={this.toggle_24_hours_trend}><strong>24 Hours Trend</strong></ModalHeader>
+              <ModalBody>
+                <ReactEcharts
+                  option={twenty_four_chart_Option}
                   style={{ height: 600 }}
                   onChartReady={onChartReady}
                   onEvents={onEvents} />
