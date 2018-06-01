@@ -162,7 +162,7 @@ export default class Product_Wise extends Component {
 
     let onEvents = {
       'click': onChartClick
-    };   
+    };
     var columns = [{
       dataField: 'ResultDate',
       text: 'Date'
@@ -185,63 +185,72 @@ export default class Product_Wise extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xs="12" lg="6">
+          <Col xs="12" lg="12">
             <Card>
               <CardHeader>
                 <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
-                <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
-                <div className="card-actions">
-                  <a onClick={this.toggle_overall_bar}>
-                    <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
-                  </a>
-                </div>
               </CardHeader>
               <CardBody>
-                <BootstrapTable keyField='ResultTime' data={this.state1} columns={columns} pagination={paginationFactory()} />
+                <Row>
+                  <Col xs="12" lg="6">
+                    <Card>
+                      <CardHeader>
+                        <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
+                        <div className="card-actions">
+                          <a onClick={this.toggle_overall_bar}>
+                            <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
+                          </a>
+                        </div>
+                      </CardHeader>
+                      <CardBody>
+                        <BootstrapTable keyField='ResultTime' data={this.state1} columns={columns} pagination={paginationFactory()} />
+                      </CardBody>
+                    </Card>
+                    <Modal isOpen={this.state.overall_bar} toggle={this.toggle_overall_bar}
+                      className={'modal-lg ' + this.props.className}>
+                      <ModalHeader toggle={this.toggle_overall_bar}>
+                        <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
+                      </ModalHeader>
+                      <ModalBody>
+                        <BootstrapTable keyField='ResultTime' data={this.state1} columns={columns} pagination={paginationFactory()} />
+                      </ModalBody>
+                    </Modal>
+                  </Col>
+                  <Col xs="12" lg="6">
+                    <Card>
+                      <CardHeader>
+                        <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
+                        <div className="card-actions">
+                          <a onClick={this.toggle_last_7_bar}>
+                            <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
+                          </a>
+                        </div>
+                      </CardHeader>
+                      <CardBody>
+                        <ReactEcharts
+                          option={bar_product_day_wise}
+                          style={{ height: 350 }}
+                          onChartReady={onChartReady}
+                          onEvents={onEvents} />
+                      </CardBody>
+                    </Card>
+                    <Modal isOpen={this.state.last_7_bar} toggle={this.toggle_last_7_bar}
+                      className={'modal-lg ' + this.props.className}>
+                      <ModalHeader toggle={this.toggle_last_7_bar}>
+                        <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
+                      </ModalHeader>
+                      <ModalBody>
+                        <ReactEcharts
+                          option={bar_product_day_wise}
+                          style={{ height: 350 }}
+                          onChartReady={onChartReady}
+                          onEvents={onEvents} />
+                      </ModalBody>
+                    </Modal>
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
-            <Modal isOpen={this.state.overall_bar} toggle={this.toggle_overall_bar}
-              className={'modal-lg ' + this.props.className}>
-              <ModalHeader toggle={this.toggle_overall_bar}>
-                <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
-              </ModalHeader>
-              <ModalBody>
-              <BootstrapTable keyField='ResultTime' data={this.state1} columns={columns} pagination={paginationFactory()} />
-              </ModalBody>
-            </Modal>
-          </Col>
-          <Col xs="12" lg="6">
-            <Card>
-              <CardHeader>
-                <Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>
-                <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
-                <div className="card-actions">
-                  <a onClick={this.toggle_last_7_bar}>
-                    <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
-                  </a>
-                </div>
-              </CardHeader>
-              <CardBody>
-                <ReactEcharts
-                  option={bar_product_day_wise}
-                  style={{ height: 350 }}
-                  onChartReady={onChartReady}
-                  onEvents={onEvents} />
-              </CardBody>
-            </Card>
-            <Modal isOpen={this.state.last_7_bar} toggle={this.toggle_last_7_bar}
-              className={'modal-lg ' + this.props.className}>
-              <ModalHeader toggle={this.toggle_last_7_bar}>
-                <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
-              </ModalHeader>
-              <ModalBody>
-                <ReactEcharts
-                  option={bar_product_day_wise}
-                  style={{ height: 350 }}
-                  onChartReady={onChartReady}
-                  onEvents={onEvents} />
-              </ModalBody>
-            </Modal>
           </Col>
         </Row>
       </div>
