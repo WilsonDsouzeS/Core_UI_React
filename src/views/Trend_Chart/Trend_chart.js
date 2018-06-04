@@ -9,12 +9,10 @@ import {
   CardBody,
   CardFooter,
   CardTitle,
-  Button,
-  TabContent, TabPane, Nav, NavItem, NavLink
+  Button, TabContent, TabPane, Nav, NavItem, NavLink
 } from 'reactstrap';
 import classnames from 'classnames';
 import ReactEcharts from 'echarts-for-react';
-
 
 class Trend_Chart extends Component {
   constructor(props) {
@@ -131,7 +129,7 @@ class Trend_Chart extends Component {
     var APS2Int_Lin_Title = "APS2 Int.Linearity";
     var Dual_APS_Corr_Title = "Dual APS Correlation";
     var CTE_Return_Title = "CTE Return";
-    var Power_Sup_Voltage_Title = "Power Supply Voltage";
+    var Power_Sup_Voltage_Title = "Power Supply Volt";
 
     var parameter_time = [];
 
@@ -169,52 +167,52 @@ class Trend_Chart extends Component {
     var APS1CT_lcl = 20;
     var APS1CT_ucl = 24;
     var APS1CT_max = APS1CT_ucl + 20;
-    
+
 
     var APS1WOT_lcl = 82;
     var APS1WOT_ucl = 86;
     var APS1WOT_max = APS1WOT_ucl + 20;
-    
+
 
     var APS2CT_lcl = 9;
     var APS2CT_ucl = 13;
     var APS2CT_max = APS2CT_ucl + 20;
-    
+
 
     var APS2WOT_lcl = 40;
     var APS2WOT_ucl = 44;
     var APS2WOT_max = APS2WOT_ucl + 20;
-    
+
 
     var APS1Diff_Lin_lcl = -2;
     var APS1Diff_Lin_ucl = 2;
     var APS1Diff_Lin_max = APS1Diff_Lin_ucl + 20;
-    
+
 
     var APS1Int_Lin_lcl = -1;
     var APS1Int_Lin_ucl = 1;
     var APS1Int_Lin_max = APS1Int_Lin_ucl + 20;
-    
+
 
     var APS2Int_Lin_lcl = -1;
     var APS2Int_Lin_ucl = 1;
     var APS2Int_Lin_max = APS2Int_Lin_ucl + 20;
-    
+
 
     var Dual_APS_Corr_lcl = -2;
     var Dual_APS_Corr_ucl = 2;
     var Dual_APS_Corr_max = Dual_APS_Corr_ucl + 20;
-    
+
 
     var CTE_Return_lcl = -1;
     var CTE_Return_ucl = 1;
     var CTE_Return_max = CTE_Return_ucl + 20;
-    
+
 
     var Power_Sup_Voltage_lcl = 4.5;
     var Power_Sup_Voltage_ucl = 5.5;
     var Power_Sup_Voltage_max = Power_Sup_Voltage_ucl + 20;
-    
+
 
 
     for (var i = 0; i < trend_details.length; i++) {
@@ -306,19 +304,21 @@ class Trend_Chart extends Component {
 
 
     //Mechanical
-    const APS1CT_Chart = trend_call(parameter_time, APS1CT, APS1CT_Title, APS1CT_LCL, APS1CT_UCL,APS1CT_max);
-    const APS1WOT_Chart = trend_call(parameter_time, APS1WOT, APS1WOT_Title, APS1WOT_LCL, APS1WOT_UCL,APS1WOT_max);
-    const APS2CT_Chart = trend_call(parameter_time, APS2CT, APS2CT_Title, APS2CT_LCL, APS2CT_UCL,APS2CT_max);
-    const APS2WOT_Chart = trend_call(parameter_time, APS2WOT, APS2WOT_Title, APS2WOT_LCL, APS2WOT_UCL,APS2WOT_max);
-    const APS1Diff_Lin_Chart = trend_call(parameter_time, APS1Diff_Lin, APS1Diff_Lin_Title, APS1Diff_Lin_LCL, APS1Diff_Lin_UCL,APS1Diff_Lin_max);
-    const APS1Int_Lin_Chart = trend_call(parameter_time, APS1Int_Lin, APS1Int_Lin_Title, APS1Int_Lin_LCL, APS1Int_Lin_UCL,APS1Int_Lin_max);
-    const APS2Int_Lin_Chart = trend_call(parameter_time, APS2Int_Lin, APS2Int_Lin_Title, APS2Int_Lin_LCL, APS2Int_Lin_UCL,APS2Int_Lin_max);
-    const Dual_APS_Corr_Chart = trend_call(parameter_time, Dual_APS_Corr, Dual_APS_Corr_Title, Dual_APS_Corr_LCL, Dual_APS_Corr_UCL,Dual_APS_Corr_max);
-    const CTE_Return_Chart = trend_call(parameter_time, CTE_Return, CTE_Return_Title, CTE_Return_LCL, CTE_Return_UCL,CTE_Return_max);
-    const Power_Sup_Voltage_Chart = trend_call(parameter_time, Power_Sup_Voltage, Power_Sup_Voltage_Title, Power_Sup_Voltage_LCL, Power_Sup_Voltage_UCL,Power_Sup_Voltage_max);
+    const APS1CT_Chart = trend_call(parameter_time, APS1CT, APS1CT_Title, APS1CT_LCL, APS1CT_UCL, APS1CT_max);
+    const APS1WOT_Chart = trend_call(parameter_time, APS1WOT, APS1WOT_Title, APS1WOT_LCL, APS1WOT_UCL, APS1WOT_max);
+    const APS2CT_Chart = trend_call(parameter_time, APS2CT, APS2CT_Title, APS2CT_LCL, APS2CT_UCL, APS2CT_max);
+    const APS2WOT_Chart = trend_call(parameter_time, APS2WOT, APS2WOT_Title, APS2WOT_LCL, APS2WOT_UCL, APS2WOT_max);
+    const APS1Diff_Lin_Chart = trend_call(parameter_time, APS1Diff_Lin, APS1Diff_Lin_Title, APS1Diff_Lin_LCL, APS1Diff_Lin_UCL, APS1Diff_Lin_max);
+    const APS1Int_Lin_Chart = trend_call(parameter_time, APS1Int_Lin, APS1Int_Lin_Title, APS1Int_Lin_LCL, APS1Int_Lin_UCL, APS1Int_Lin_max);
+    const APS2Int_Lin_Chart = trend_call(parameter_time, APS2Int_Lin, APS2Int_Lin_Title, APS2Int_Lin_LCL, APS2Int_Lin_UCL, APS2Int_Lin_max);
+    const Dual_APS_Corr_Chart = trend_call(parameter_time, Dual_APS_Corr, Dual_APS_Corr_Title, Dual_APS_Corr_LCL, Dual_APS_Corr_UCL, Dual_APS_Corr_max);
+    const CTE_Return_Chart = trend_call(parameter_time, CTE_Return, CTE_Return_Title, CTE_Return_LCL, CTE_Return_UCL, CTE_Return_max);
+    const Power_Sup_Voltage_Chart = trend_call(parameter_time, Power_Sup_Voltage, Power_Sup_Voltage_Title, Power_Sup_Voltage_LCL, Power_Sup_Voltage_UCL, Power_Sup_Voltage_max);
 
+    const test_chart_val = JSON.stringify(APS1CT_Chart);
+    console.log(JSON.stringify(APS1CT_Chart));
 
-    function trend_call(P_time, P_value, P_Title, P_LCL, P_UCL,P_max) {
+    function trend_call(P_time, P_value, P_Title, P_LCL, P_UCL, P_max) {
       const Mechanical_Parameter_Trend = {
         title: {
           text: P_Title
@@ -343,7 +343,7 @@ class Trend_Chart extends Component {
         },
         yAxis: {
           type: 'value',
-          max:P_max
+          max: P_max
         },
         series: [
           {
@@ -410,7 +410,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={IPF_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280, width:369 }}
                               />
                             </div>
                           </Col>
@@ -418,7 +418,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={RPF_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280, width:369 }}
                               />
                             </div>
                           </Col>
@@ -426,7 +426,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={HYS_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280, width:369 }}
                               />
                             </div>
                           </Col>
@@ -434,7 +434,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={FPTB_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280, width:369 }}
                               />
                             </div>
                           </Col>
@@ -445,7 +445,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={WOTM_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280, width:369 }}
                               />
                             </div>
                           </Col>
@@ -453,7 +453,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={CTDB_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280, width:369 }}
                               />
                             </div>
                           </Col>
@@ -461,7 +461,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={WOTDB_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280, width:369 }}
                               />
                             </div>
                           </Col>
@@ -473,7 +473,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS1CT_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -481,7 +481,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS1WOT_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -489,7 +489,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS2CT_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -497,7 +497,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS2WOT_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -508,7 +508,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS1Diff_Lin_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -516,7 +516,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS1Int_Lin_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -524,7 +524,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS2Int_Lin_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -532,7 +532,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={Dual_APS_Corr_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -543,7 +543,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={CTE_Return_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280,width:369 }}
                               />
                             </div>
                           </Col>
@@ -551,7 +551,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={Power_Sup_Voltage_Chart}
-                                style={{ height: 280 }}
+                                style={{ height: 280, width:369 }}
                               />
                             </div>
                           </Col>

@@ -395,7 +395,7 @@ export default class Over_all_status extends Component {
       var APS2Int_Lin_Title = "APS2 Int.Linearity";
       var Dual_APS_Corr_Title = "Dual APS Correlation";
       var CTE_Return_Title = "CTE Return";
-      var Power_Sup_Voltage_Title = "Power Supply Voltage";
+      var Power_Sup_Voltage_Title = "Power Supply Volt";
 
       var parameter_time = [];
 
@@ -424,56 +424,84 @@ export default class Over_all_status extends Component {
       //Mechanical
       var wotm_lcl = 30;
       var wotm_ucl = 38;
+      var wotm_max = wotm_ucl + 20;
 
       var wotdb_lcl = 0.5;
       var wotdb_ucl = 5;
+      var wotdb_max = wotdb_ucl + 20;
 
       var ipf_lcl = 13;
       var ipf_ucl = 21;
+      var ipf_max = ipf_ucl + 20;
 
       var rpf_lcl = 12;
       var rpf_ucl = 20;
+      var rpf_max = rpf_ucl + 20;
 
       var hys_lcl = 0;
       var hys_ucl = 100;
+      var hys_max = hys_ucl + 20;
 
       var ctdb_lcl = 2.5;
       var ctdb_ucl = 5;
+      var ctdb_max = ctdb_ucl + 20;
 
       var fptd_lcl = 17;
       var fptd_ucl = 21;
+      var fptd_max = fptd_ucl + 20;
 
 
       //Electrical
       var APS1CT_lcl = 20;
       var APS1CT_ucl = 24;
+      var APS1CT_max = APS1CT_ucl + 20;
+
 
       var APS1WOT_lcl = 82;
       var APS1WOT_ucl = 86;
+      var APS1WOT_max = APS1WOT_ucl + 20;
+
 
       var APS2CT_lcl = 9;
       var APS2CT_ucl = 13;
+      var APS2CT_max = APS2CT_ucl + 20;
+
 
       var APS2WOT_lcl = 40;
       var APS2WOT_ucl = 44;
+      var APS2WOT_max = APS2WOT_ucl + 20;
+
 
       var APS1Diff_Lin_lcl = -2;
       var APS1Diff_Lin_ucl = 2;
+      var APS1Diff_Lin_max = APS1Diff_Lin_ucl + 20;
+
 
       var APS1Int_Lin_lcl = -1;
       var APS1Int_Lin_ucl = 1;
+      var APS1Int_Lin_max = APS1Int_Lin_ucl + 20;
+
 
       var APS2Int_Lin_lcl = -1;
       var APS2Int_Lin_ucl = 1;
+      var APS2Int_Lin_max = APS2Int_Lin_ucl + 20;
+
 
       var Dual_APS_Corr_lcl = -2;
       var Dual_APS_Corr_ucl = 2;
+      var Dual_APS_Corr_max = Dual_APS_Corr_ucl + 20;
+
 
       var CTE_Return_lcl = -1;
       var CTE_Return_ucl = 1;
+      var CTE_Return_max = CTE_Return_ucl + 20;
+
 
       var Power_Sup_Voltage_lcl = 4.5;
       var Power_Sup_Voltage_ucl = 5.5;
+      var Power_Sup_Voltage_max = Power_Sup_Voltage_ucl + 20;
+
+
       for (var i = 0; i < new_array.length; i++) {
         parameter_time[i] = new_array[i].ResultDate;
         //Mechanical
@@ -549,29 +577,29 @@ export default class Over_all_status extends Component {
       }
 
       //Electrical
-      CTDB_Chart = trend_call(parameter_time, CTDB, CTDB_Title, CTDB_LCL, CTDB_UCL);
-      FPTB_Chart = trend_call(parameter_time, FPTD, FPTD_Title, FPTD_LCL, FPTD_UCL);
-      HYS_Chart = trend_call(parameter_time, HYS, HYS_Title, HYS_LCL, HYS_UCL);
-      IPF_Chart = trend_call(parameter_time, IPF, IPF_Title, IPF_LCL, IPF_UCL);
-      RPF_Chart = trend_call(parameter_time, RPF, RPF_Title, RPF_LCL, RPF_UCL);
-      WOTM_Chart = trend_call(parameter_time, WOTM, WOTM_Title, WOTM_LCL, WOTM_UCL);
-      WOTDB_Chart = trend_call(parameter_time, WOTDB, WOTDB_Title, WOTDB_LCL, WOTDB_UCL);
+      var CTDB_Chart = trend_call(parameter_time, CTDB, CTDB_Title, CTDB_LCL, CTDB_UCL, ctdb_max);
+      var FPTB_Chart = trend_call(parameter_time, FPTD, FPTD_Title, FPTD_LCL, FPTD_UCL, fptd_max);
+      var HYS_Chart = trend_call(parameter_time, HYS, HYS_Title, HYS_LCL, HYS_UCL, hys_max);
+      var IPF_Chart = trend_call(parameter_time, IPF, IPF_Title, IPF_LCL, IPF_UCL, ipf_max);
+      var RPF_Chart = trend_call(parameter_time, RPF, RPF_Title, RPF_LCL, RPF_UCL, rpf_max);
+      var WOTM_Chart = trend_call(parameter_time, WOTM, WOTM_Title, WOTM_LCL, WOTM_UCL, wotm_max);
+      var WOTDB_Chart = trend_call(parameter_time, WOTDB, WOTDB_Title, WOTDB_LCL, WOTDB_UCL, wotdb_max);
 
 
       //Mechanical
-      APS1CT_Chart = trend_call(parameter_time, APS1CT, APS1CT_Title, APS1CT_LCL, APS1CT_UCL);
-      APS1WOT_Chart = trend_call(parameter_time, APS1WOT, APS1WOT_Title, APS1WOT_LCL, APS1WOT_UCL);
-      APS2CT_Chart = trend_call(parameter_time, APS2CT, APS2CT_Title, APS2CT_LCL, APS2CT_UCL);
-      APS2WOT_Chart = trend_call(parameter_time, APS2WOT, APS2WOT_Title, APS2WOT_LCL, APS2WOT_UCL);
-      APS1Diff_Lin_Chart = trend_call(parameter_time, APS1Diff_Lin, APS1Diff_Lin_Title, APS1Diff_Lin_LCL, APS1Diff_Lin_UCL);
-      APS1Int_Lin_Chart = trend_call(parameter_time, APS1Int_Lin, APS1Int_Lin_Title, APS1Int_Lin_LCL, APS1Int_Lin_UCL);
-      APS2Int_Lin_Chart = trend_call(parameter_time, APS2Int_Lin, APS2Int_Lin_Title, APS2Int_Lin_LCL, APS2Int_Lin_UCL);
-      Dual_APS_Corr_Chart = trend_call(parameter_time, Dual_APS_Corr, Dual_APS_Corr_Title, Dual_APS_Corr_LCL, Dual_APS_Corr_UCL);
-      CTE_Return_Chart = trend_call(parameter_time, CTE_Return, CTE_Return_Title, CTE_Return_LCL, CTE_Return_UCL);
-      Power_Sup_Voltage_Chart = trend_call(parameter_time, Power_Sup_Voltage, Power_Sup_Voltage_Title, Power_Sup_Voltage_LCL, Power_Sup_Voltage_UCL);
+      var APS1CT_Chart = trend_call(parameter_time, APS1CT, APS1CT_Title, APS1CT_LCL, APS1CT_UCL, APS1CT_max);
+      var APS1WOT_Chart = trend_call(parameter_time, APS1WOT, APS1WOT_Title, APS1WOT_LCL, APS1WOT_UCL, APS1WOT_max);
+      var APS2CT_Chart = trend_call(parameter_time, APS2CT, APS2CT_Title, APS2CT_LCL, APS2CT_UCL, APS2CT_max);
+      var APS2WOT_Chart = trend_call(parameter_time, APS2WOT, APS2WOT_Title, APS2WOT_LCL, APS2WOT_UCL, APS2WOT_max);
+      var APS1Diff_Lin_Chart = trend_call(parameter_time, APS1Diff_Lin, APS1Diff_Lin_Title, APS1Diff_Lin_LCL, APS1Diff_Lin_UCL, APS1Diff_Lin_max);
+      var APS1Int_Lin_Chart = trend_call(parameter_time, APS1Int_Lin, APS1Int_Lin_Title, APS1Int_Lin_LCL, APS1Int_Lin_UCL, APS1Int_Lin_max);
+      var APS2Int_Lin_Chart = trend_call(parameter_time, APS2Int_Lin, APS2Int_Lin_Title, APS2Int_Lin_LCL, APS2Int_Lin_UCL, APS2Int_Lin_max);
+      var Dual_APS_Corr_Chart = trend_call(parameter_time, Dual_APS_Corr, Dual_APS_Corr_Title, Dual_APS_Corr_LCL, Dual_APS_Corr_UCL, Dual_APS_Corr_max);
+      var CTE_Return_Chart = trend_call(parameter_time, CTE_Return, CTE_Return_Title, CTE_Return_LCL, CTE_Return_UCL, CTE_Return_max);
+      var Power_Sup_Voltage_Chart = trend_call(parameter_time, Power_Sup_Voltage, Power_Sup_Voltage_Title, Power_Sup_Voltage_LCL, Power_Sup_Voltage_UCL, Power_Sup_Voltage_max);
     }
 
-    function trend_call(P_time, P_value, P_Title, P_LCL, P_UCL) {
+    function trend_call(P_time, P_value, P_Title, P_LCL, P_UCL, P_max) {
       const parameter_trend = {
         title: {
           text: P_Title
@@ -580,7 +608,8 @@ export default class Over_all_status extends Component {
           trigger: 'axis'
         },
         legend: {
-          data: ['LCL', 'CL', 'UCL']
+          data: ['LCL', 'CL', 'UCL'],
+          x: 'right'
         },
         grid: {
           left: '3%',
@@ -595,6 +624,7 @@ export default class Over_all_status extends Component {
         },
         yAxis: {
           type: 'value',
+          max: P_max
         },
         series: [
           {
@@ -628,7 +658,7 @@ export default class Over_all_status extends Component {
           <Col xs="12" lg="12">
             <Card>
               <CardHeader>
-              <Link to="/historical_main"><i className="fa fa-arrow-circle-left"></i> Back</Link>
+                <Link to="/historical_main"><i className="fa fa-arrow-circle-left"></i> Back</Link>
               </CardHeader>
               <CardBody>
                 <Row>
@@ -706,14 +736,14 @@ export default class Over_all_status extends Component {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggle_tab('1'); }}>
                             Mechanical
-              </NavLink>
+                    </NavLink>
                         </NavItem>
                         <NavItem>
                           <NavLink
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggle_tab('2'); }}>
                             Electrical
-              </NavLink>
+                        </NavLink>
                         </NavItem>
                       </Nav>
                       <TabContent activeTab={this.state.activeTab}>
@@ -723,7 +753,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={IPF_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -731,7 +761,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={RPF_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -739,7 +769,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={HYS_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -747,7 +777,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={FPTB_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -758,7 +788,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={WOTM_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -766,7 +796,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={CTDB_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -774,7 +804,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={WOTDB_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -786,7 +816,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={APS1CT_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -794,7 +824,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={APS1WOT_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -802,7 +832,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={APS2CT_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -810,7 +840,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={APS2WOT_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -821,7 +851,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={APS1Diff_Lin_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -829,7 +859,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={APS1Int_Lin_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -837,7 +867,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={APS2Int_Lin_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -845,7 +875,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={Dual_APS_Corr_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -856,7 +886,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={CTE_Return_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>
@@ -864,7 +894,7 @@ export default class Over_all_status extends Component {
                               <div className="chart-wrapper">
                                 <ReactEcharts
                                   option={Power_Sup_Voltage_Chart}
-                                  style={{ height: 280 }}
+                                  style={{ height: 280, width: 369 }}
                                 />
                               </div>
                             </Col>

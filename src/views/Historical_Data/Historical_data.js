@@ -146,12 +146,10 @@ export default class Historical_Data extends Component {
       var vm = this;
       axios.get('http://192.168.20.26:5000/currDtResultCount')
         .then(function (response) {
-          console.log(response);
           if (response.data.message == 404) {
             vm.setState({
               data_24_hrs: !vm.state.data_24_hrs
             });
-            console.log(vm.state.data_24_hrs);
           }
           else {
             var result = response.data.data;
@@ -445,7 +443,7 @@ export default class Historical_Data extends Component {
                         </div>
                       </CardHeader>
                       <CardBody>
-                      {this.state.data_24_hrs && (<div className="text-center">No Records Found</div>)}
+                        {this.state.data_24_hrs && (<div className="text-center">No Records Found</div>)}
                         {this.state.mount_data && (<div className="text-center" style={{ height: 190 }}><div className="text-center" style={{ marginTop: 150 }}><i className="fa fa-spinner fa-lg fa-spin fa-3x"></i></div></div>)}
                         {!this.state.data_24_hrs && !this.state.mount_data && (<ReactEcharts
                           option={twenty_four_chart_Option}
