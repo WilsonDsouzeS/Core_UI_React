@@ -13,6 +13,7 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 import ReactEcharts from 'echarts-for-react';
+import side_bar_nav from '../../components/Header/';
 
 class Trend_Chart extends Component {
   constructor(props) {
@@ -31,13 +32,14 @@ class Trend_Chart extends Component {
       });
     }
   }
+
   render() {
     var Trend_Comes_From = localStorage.getItem("Trend_Comes_From");
     var trend_details = JSON.parse(localStorage.getItem("Date_Wise_Trend"));
     var Product_Name = localStorage.getItem("Selected_Product_4_Trend");
     var Selected_Date = localStorage.getItem("Selected_Date_4_Trend");
     var date = new Date();
-    var c_month = date.getMonth() + 1;
+    var c_month = date.getMonth() + 2;
 
     //Mechanical
     var CTDB = [];
@@ -136,82 +138,104 @@ class Trend_Chart extends Component {
     //Mechanical
     var wotm_lcl = 30;
     var wotm_ucl = 38;
-    var wotm_max = wotm_ucl + 20;
+    var wotm_min = wotm_lcl - 2;
+    var wotm_max = wotm_ucl + 2;
 
     var wotdb_lcl = 0.5;
     var wotdb_ucl = 5;
-    var wotdb_max = wotdb_ucl + 20;
+    var wotdb_min = wotdb_lcl - 2;
+    var wotdb_max = wotdb_ucl + 2;
 
     var ipf_lcl = 13;
     var ipf_ucl = 21;
-    var ipf_max = ipf_ucl + 20;
+    var ipf_min = ipf_lcl - 2;
+    var ipf_max = ipf_ucl + 2;
 
     var rpf_lcl = 12;
     var rpf_ucl = 20;
-    var rpf_max = rpf_ucl + 20;
+    var rpf_min = rpf_lcl - 2;
+    var rpf_max = rpf_ucl + 2;
 
     var hys_lcl = 0;
     var hys_ucl = 100;
-    var hys_max = hys_ucl + 20;
+    var hys_min = hys_lcl - 2;
+    var hys_max = hys_ucl + 2;
 
     var ctdb_lcl = 2.5;
     var ctdb_ucl = 5;
-    var ctdb_max = ctdb_ucl + 20;
+    var ctdb_min = ctdb_lcl - 2;
+    var ctdb_max = ctdb_ucl + 2;
 
     var fptd_lcl = 17;
     var fptd_ucl = 21;
-    var fptd_max = fptd_ucl + 20;
+    var fptd_min = fptd_lcl - 2;
+    var fptd_max = fptd_ucl + 2;
 
 
     //Electrical
     var APS1CT_lcl = 20;
     var APS1CT_ucl = 24;
-    var APS1CT_max = APS1CT_ucl + 20;
+    var APS1CT_min = APS1CT_lcl - 2;
+    var APS1CT_max = APS1CT_ucl + 2;
 
 
     var APS1WOT_lcl = 82;
     var APS1WOT_ucl = 86;
-    var APS1WOT_max = APS1WOT_ucl + 20;
+    var APS1WOT_min = APS1WOT_lcl - 2;
+    var APS1WOT_max = APS1WOT_ucl + 2;
 
 
     var APS2CT_lcl = 9;
     var APS2CT_ucl = 13;
-    var APS2CT_max = APS2CT_ucl + 20;
+    var APS2CT_min = APS2CT_lcl - 2;
+    var APS2CT_max = APS2CT_ucl + 2;
 
 
     var APS2WOT_lcl = 40;
     var APS2WOT_ucl = 44;
-    var APS2WOT_max = APS2WOT_ucl + 20;
+    var APS2WOT_min = APS2WOT_lcl - 2;
+    var APS2WOT_max = APS2WOT_ucl + 2;
 
 
     var APS1Diff_Lin_lcl = -2;
     var APS1Diff_Lin_ucl = 2;
-    var APS1Diff_Lin_max = APS1Diff_Lin_ucl + 20;
+    var APS1Diff_Lin_min = APS1Diff_Lin_lcl - 2;
+    var APS1Diff_Lin_max = APS1Diff_Lin_ucl + 2;
+
 
 
     var APS1Int_Lin_lcl = -1;
     var APS1Int_Lin_ucl = 1;
-    var APS1Int_Lin_max = APS1Int_Lin_ucl + 20;
+    var APS1Int_Lin_min = APS1Int_Lin_lcl - 2;
+    var APS1Int_Lin_max = APS1Int_Lin_ucl + 2;
+
 
 
     var APS2Int_Lin_lcl = -1;
     var APS2Int_Lin_ucl = 1;
-    var APS2Int_Lin_max = APS2Int_Lin_ucl + 20;
+    var APS2Int_Lin_min = APS2Int_Lin_lcl - 2;
+    var APS2Int_Lin_max = APS2Int_Lin_ucl + 2;
 
 
     var Dual_APS_Corr_lcl = -2;
     var Dual_APS_Corr_ucl = 2;
-    var Dual_APS_Corr_max = Dual_APS_Corr_ucl + 20;
+    var Dual_APS_Corr_min = Dual_APS_Corr_lcl - 2;
+    var Dual_APS_Corr_max = Dual_APS_Corr_ucl + 2;
+
 
 
     var CTE_Return_lcl = -1;
     var CTE_Return_ucl = 1;
-    var CTE_Return_max = CTE_Return_ucl + 20;
+    var CTE_Return_min = CTE_Return_lcl - 2;
+    var CTE_Return_max = CTE_Return_ucl + 2;
+
 
 
     var Power_Sup_Voltage_lcl = 4.5;
     var Power_Sup_Voltage_ucl = 5.5;
-    var Power_Sup_Voltage_max = Power_Sup_Voltage_ucl + 20;
+    var Power_Sup_Voltage_min = Power_Sup_Voltage_lcl - 2;
+    var Power_Sup_Voltage_max = Power_Sup_Voltage_ucl + 2;
+
 
 
 
@@ -294,31 +318,28 @@ class Trend_Chart extends Component {
 
 
     //Electrical
-    const CTDB_Chart = trend_call(parameter_time, CTDB, CTDB_Title, CTDB_LCL, CTDB_UCL, ctdb_max);
-    const FPTB_Chart = trend_call(parameter_time, FPTD, FPTD_Title, FPTD_LCL, FPTD_UCL, fptd_max);
-    const HYS_Chart = trend_call(parameter_time, HYS, HYS_Title, HYS_LCL, HYS_UCL, hys_max);
-    const IPF_Chart = trend_call(parameter_time, IPF, IPF_Title, IPF_LCL, IPF_UCL, ipf_max);
-    const RPF_Chart = trend_call(parameter_time, RPF, RPF_Title, RPF_LCL, RPF_UCL, rpf_max);
-    const WOTM_Chart = trend_call(parameter_time, WOTM, WOTM_Title, WOTM_LCL, WOTM_UCL, wotm_max);
-    const WOTDB_Chart = trend_call(parameter_time, WOTDB, WOTDB_Title, WOTDB_LCL, WOTDB_UCL, wotdb_max);
+    const CTDB_Chart = trend_call(parameter_time, CTDB, CTDB_Title, CTDB_LCL, CTDB_UCL, ctdb_min, ctdb_max);
+    const FPTB_Chart = trend_call(parameter_time, FPTD, FPTD_Title, FPTD_LCL, FPTD_UCL, fptd_min, fptd_max);
+    const HYS_Chart = trend_call(parameter_time, HYS, HYS_Title, HYS_LCL, HYS_UCL, hys_min, hys_max);
+    const IPF_Chart = trend_call(parameter_time, IPF, IPF_Title, IPF_LCL, IPF_UCL, ipf_min, ipf_max);
+    const RPF_Chart = trend_call(parameter_time, RPF, RPF_Title, RPF_LCL, RPF_UCL, rpf_min, rpf_max);
+    const WOTM_Chart = trend_call(parameter_time, WOTM, WOTM_Title, WOTM_LCL, WOTM_UCL, wotm_min, wotm_max);
+    const WOTDB_Chart = trend_call(parameter_time, WOTDB, WOTDB_Title, WOTDB_LCL, WOTDB_UCL, wotdb_min, wotdb_max);
 
 
     //Mechanical
-    const APS1CT_Chart = trend_call(parameter_time, APS1CT, APS1CT_Title, APS1CT_LCL, APS1CT_UCL, APS1CT_max);
-    const APS1WOT_Chart = trend_call(parameter_time, APS1WOT, APS1WOT_Title, APS1WOT_LCL, APS1WOT_UCL, APS1WOT_max);
-    const APS2CT_Chart = trend_call(parameter_time, APS2CT, APS2CT_Title, APS2CT_LCL, APS2CT_UCL, APS2CT_max);
-    const APS2WOT_Chart = trend_call(parameter_time, APS2WOT, APS2WOT_Title, APS2WOT_LCL, APS2WOT_UCL, APS2WOT_max);
-    const APS1Diff_Lin_Chart = trend_call(parameter_time, APS1Diff_Lin, APS1Diff_Lin_Title, APS1Diff_Lin_LCL, APS1Diff_Lin_UCL, APS1Diff_Lin_max);
-    const APS1Int_Lin_Chart = trend_call(parameter_time, APS1Int_Lin, APS1Int_Lin_Title, APS1Int_Lin_LCL, APS1Int_Lin_UCL, APS1Int_Lin_max);
-    const APS2Int_Lin_Chart = trend_call(parameter_time, APS2Int_Lin, APS2Int_Lin_Title, APS2Int_Lin_LCL, APS2Int_Lin_UCL, APS2Int_Lin_max);
-    const Dual_APS_Corr_Chart = trend_call(parameter_time, Dual_APS_Corr, Dual_APS_Corr_Title, Dual_APS_Corr_LCL, Dual_APS_Corr_UCL, Dual_APS_Corr_max);
-    const CTE_Return_Chart = trend_call(parameter_time, CTE_Return, CTE_Return_Title, CTE_Return_LCL, CTE_Return_UCL, CTE_Return_max);
-    const Power_Sup_Voltage_Chart = trend_call(parameter_time, Power_Sup_Voltage, Power_Sup_Voltage_Title, Power_Sup_Voltage_LCL, Power_Sup_Voltage_UCL, Power_Sup_Voltage_max);
+    const APS1CT_Chart = trend_call(parameter_time, APS1CT, APS1CT_Title, APS1CT_LCL, APS1CT_UCL, APS1CT_min, APS1CT_max);
+    const APS1WOT_Chart = trend_call(parameter_time, APS1WOT, APS1WOT_Title, APS1WOT_LCL, APS1WOT_UCL, APS1WOT_min, APS1WOT_max);
+    const APS2CT_Chart = trend_call(parameter_time, APS2CT, APS2CT_Title, APS2CT_LCL, APS2CT_UCL, APS2CT_min, APS2CT_max);
+    const APS2WOT_Chart = trend_call(parameter_time, APS2WOT, APS2WOT_Title, APS2WOT_LCL, APS2WOT_UCL, APS2WOT_min, APS2WOT_max);
+    const APS1Diff_Lin_Chart = trend_call(parameter_time, APS1Diff_Lin, APS1Diff_Lin_Title, APS1Diff_Lin_LCL, APS1Diff_Lin_UCL, APS1Diff_Lin_min, APS1Diff_Lin_max);
+    const APS1Int_Lin_Chart = trend_call(parameter_time, APS1Int_Lin, APS1Int_Lin_Title, APS1Int_Lin_LCL, APS1Int_Lin_UCL, APS1Int_Lin_min, APS1Int_Lin_max);
+    const APS2Int_Lin_Chart = trend_call(parameter_time, APS2Int_Lin, APS2Int_Lin_Title, APS2Int_Lin_LCL, APS2Int_Lin_UCL, APS2Int_Lin_min, APS2Int_Lin_max);
+    const Dual_APS_Corr_Chart = trend_call(parameter_time, Dual_APS_Corr, Dual_APS_Corr_Title, Dual_APS_Corr_LCL, Dual_APS_Corr_UCL, Dual_APS_Corr_min, Dual_APS_Corr_max);
+    const CTE_Return_Chart = trend_call(parameter_time, CTE_Return, CTE_Return_Title, CTE_Return_LCL, CTE_Return_UCL, CTE_Return_min, CTE_Return_max);
+    const Power_Sup_Voltage_Chart = trend_call(parameter_time, Power_Sup_Voltage, Power_Sup_Voltage_Title, Power_Sup_Voltage_LCL, Power_Sup_Voltage_UCL, Power_Sup_Voltage_min, Power_Sup_Voltage_max);
 
-    const test_chart_val = JSON.stringify(APS1CT_Chart);
-    console.log(JSON.stringify(APS1CT_Chart));
-
-    function trend_call(P_time, P_value, P_Title, P_LCL, P_UCL, P_max) {
+    function trend_call(P_time, P_value, P_Title, P_LCL, P_UCL, P_min, P_max) {
       const Mechanical_Parameter_Trend = {
         title: {
           text: P_Title
@@ -343,6 +364,7 @@ class Trend_Chart extends Component {
         },
         yAxis: {
           type: 'value',
+          min: P_min,
           max: P_max
         },
         series: [
@@ -379,10 +401,15 @@ class Trend_Chart extends Component {
                 <h2>{Product_Name} - Parameters Trend as on {Selected_Date}</h2>
                 {Trend_Comes_From == "overall_status" && (<Link to="/overall_status"><i className="fa fa-arrow-circle-left"></i> Back</Link>)}
                 {Trend_Comes_From == "product_wise" && (<Link to="/product_wise"><i className="fa fa-arrow-circle-left"></i> Back</Link>)}
-                <div className="pull-right">
+                {/* <div className="pull-right">
                   Date :- {date.getDate() + "-" + c_month + "-" + date.getFullYear()} &nbsp; &nbsp;
                   Time :- {date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()}
-                </div>
+                </div> */}
+                <span className="pull-right" style={{ marginTop: -35 }}>
+                  <b>UCL</b> : Upper Current Limit <br />
+                  <b>LCL</b> : Lower Current Limit <br />
+                  <b>&nbsp;&nbsp;CL</b> : Current Limit
+                </span>
               </CardHeader>
               <CardBody>
                 <Row>
@@ -392,76 +419,107 @@ class Trend_Chart extends Component {
                         <NavLink
                           className={classnames({ active: this.state.activeTab === '1' })}
                           onClick={() => { this.toggle('1'); }}>
-                          Mechanical
+                          Electrical
                         </NavLink>
                       </NavItem>
                       <NavItem>
                         <NavLink
                           className={classnames({ active: this.state.activeTab === '2' })}
                           onClick={() => { this.toggle('2'); }}>
-                          Electrical
+                          Mechanical
                         </NavLink>
                       </NavItem>
                     </Nav>
                     <TabContent activeTab={this.state.activeTab}>
                       <TabPane tabId="1">
                         <Row>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={IPF_Chart}
-                                style={{ height: 280, width:369 }}
+                                option={APS1CT_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={RPF_Chart}
-                                style={{ height: 280, width:369 }}
+                                option={APS1WOT_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={HYS_Chart}
-                                style={{ height: 280, width:369 }}
-                              />
-                            </div>
-                          </Col>
-                          <Col xs="12" lg="3">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={FPTB_Chart}
-                                style={{ height: 280, width:369 }}
+                                option={APS2CT_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
                         </Row>
                         <br />
                         <Row>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={WOTM_Chart}
-                                style={{ height: 280, width:369 }}
+                                option={APS2WOT_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
-                          <Col xs="12" lg="3">
+
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={CTDB_Chart}
-                                style={{ height: 280, width:369 }}
+                                option={APS1Diff_Lin_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={WOTDB_Chart}
-                                style={{ height: 280, width:369 }}
+                                option={APS1Int_Lin_Chart}
+                                style={{ height: 280, width: 370 }}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                        <br />
+                        <Row>
+                          <Col xs="12" lg="4">
+                            <div className="chart-wrapper">
+                              <ReactEcharts
+                                option={APS2Int_Lin_Chart}
+                                style={{ height: 280, width: 370 }}
+                              />
+                            </div>
+                          </Col>
+                          <Col xs="12" lg="4">
+                            <div className="chart-wrapper">
+                              <ReactEcharts
+                                option={Dual_APS_Corr_Chart}
+                                style={{ height: 280, width: 370 }}
+                              />
+                            </div>
+                          </Col>
+                          <Col xs="12" lg="4">
+                            <div className="chart-wrapper">
+                              <ReactEcharts
+                                option={CTE_Return_Chart}
+                                style={{ height: 280, width: 370 }}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                        <br />
+                        <Row>
+                          <Col xs="12" lg="4">
+                            <div className="chart-wrapper">
+                              <ReactEcharts
+                                option={Power_Sup_Voltage_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
@@ -469,89 +527,65 @@ class Trend_Chart extends Component {
                       </TabPane>
                       <TabPane tabId="2">
                         <Row>
-                          <Col xs="12" lg="3">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={APS1CT_Chart}
-                                style={{ height: 280,width:369 }}
+                          <Col xs="12" lg="4">
+                            <div className="chart-wrapper" id="chart_1">
+                              <ReactEcharts id="chart_11"
+                                option={IPF_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
-                          <Col xs="12" lg="3">
-                            <div className="chart-wrapper">
+                          <Col xs="12" lg="4">
+                            <div className="chart-wrapper" id="chart_2">
                               <ReactEcharts
-                                option={APS1WOT_Chart}
-                                style={{ height: 280,width:369 }}
+                                option={RPF_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={APS2CT_Chart}
-                                style={{ height: 280,width:369 }}
-                              />
-                            </div>
-                          </Col>
-                          <Col xs="12" lg="3">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={APS2WOT_Chart}
-                                style={{ height: 280,width:369 }}
+                                option={HYS_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
                         </Row>
                         <br />
                         <Row>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={APS1Diff_Lin_Chart}
-                                style={{ height: 280,width:369 }}
+                                option={FPTB_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={APS1Int_Lin_Chart}
-                                style={{ height: 280,width:369 }}
+                                option={WOTM_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={APS2Int_Lin_Chart}
-                                style={{ height: 280,width:369 }}
-                              />
-                            </div>
-                          </Col>
-                          <Col xs="12" lg="3">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={Dual_APS_Corr_Chart}
-                                style={{ height: 280,width:369 }}
+                                option={CTDB_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
                         </Row>
                         <br />
                         <Row>
-                          <Col xs="12" lg="3">
+                          <Col xs="12" lg="4">
                             <div className="chart-wrapper">
                               <ReactEcharts
-                                option={CTE_Return_Chart}
-                                style={{ height: 280,width:369 }}
-                              />
-                            </div>
-                          </Col>
-                          <Col xs="12" lg="3">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={Power_Sup_Voltage_Chart}
-                                style={{ height: 280, width:369 }}
+                                option={WOTDB_Chart}
+                                style={{ height: 280, width: 370 }}
                               />
                             </div>
                           </Col>
@@ -564,7 +598,7 @@ class Trend_Chart extends Component {
             </Card>
           </Col>
         </Row>
-      </div>
+      </div >
     )
   }
 }
