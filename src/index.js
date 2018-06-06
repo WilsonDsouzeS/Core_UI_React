@@ -23,7 +23,7 @@ setTimeout(() => {
     auth.login();
     auth.handleAuthentication();
   }
-}, 2500);
+}, 3000);
 
 ReactDOM.render((
   <HashRouter>
