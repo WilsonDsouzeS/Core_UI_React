@@ -624,7 +624,11 @@ export default class Over_all_status extends Component {
     function trend_call(P_time, P_value, P_Title, P_LCL, P_UCL) {
       const parameter_trend = {
         title: {
-          text: P_Title
+          text: P_Title,
+          textStyle: {
+            fontSize: 15,
+            fontWeight: 'bold'
+        }
         },
         tooltip: {
           trigger: 'axis'

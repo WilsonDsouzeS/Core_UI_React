@@ -349,7 +349,11 @@ class Trend_Chart extends Component {
     function trend_call(P_time, P_value, P_Title, P_LCL, P_UCL, P_min, P_max) {
       const Mechanical_Parameter_Trend = {
         title: {
-          text: P_Title
+          text: P_Title,
+          textStyle: {
+            fontSize: 15,
+            fontWeight: 'bold'
+        }
         },
         tooltip: {
           trigger: 'axis'
