@@ -626,7 +626,7 @@ export default class Over_all_status extends Component {
         title: {
           text: P_Title,
           textStyle: {
-            fontSize: 15,
+            fontSize: 13,
             fontWeight: 'bold'
         }
         },

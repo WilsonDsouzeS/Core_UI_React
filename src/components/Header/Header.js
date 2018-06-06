@@ -43,7 +43,7 @@ class Header extends Component {
         <NavbarToggler className="d-md-down-none mr-auto" onClick={this.sidebarToggle}>
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
-        <Button outline color="primary" size="sm" onClick={auth.logout}>LogOut</Button>
+        <Button outline color="primary" size="sm" onClick={auth.logout}>Logout</Button>
         <img src={beta_icon} alt="Beta" height="65" width="65"/>
       </header>
     );

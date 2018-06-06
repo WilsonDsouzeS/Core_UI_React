@@ -351,7 +351,7 @@ class Trend_Chart extends Component {
         title: {
           text: P_Title,
           textStyle: {
-            fontSize: 15,
+            fontSize: 13,
             fontWeight: 'bold'
         }
         },
