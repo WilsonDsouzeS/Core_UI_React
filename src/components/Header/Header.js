@@ -7,6 +7,7 @@ import {
   Button
 } from 'reactstrap';
 import Auth from '../../Auth/Auth';
+import beta_icon from '../../../public/img/beta_icon.png';
 
 const auth=new Auth();
 
@@ -43,6 +44,7 @@ class Header extends Component {
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
         <Button outline color="primary" size="sm" onClick={auth.logout}>LogOut</Button>
+        <img src={beta_icon} alt="Beta" height="65" width="65"/>
       </header>
     );
   }

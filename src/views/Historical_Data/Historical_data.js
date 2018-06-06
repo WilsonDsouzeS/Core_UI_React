@@ -378,7 +378,7 @@ export default class Historical_Data extends Component {
                         </div>
                       </CardHeader>
                       <CardBody>
-                        {this.state.mount_data && (<div className="text-center" style={{ height: 190 }}><div className="text-center" style={{ marginTop: 150 }}><i className="fa fa-spinner fa-lg fa-spin fa-3x"></i></div></div>)}
+                        {this.state.mount_data && (<div className="text-center"><i className="fa fa-spinner fa-lg fa-spin fa-3x"></i></div>)}
                         {!this.state.mount_data && (<ReactEcharts
                           option={pie_getOption}
                           style={{ height: 350 }}

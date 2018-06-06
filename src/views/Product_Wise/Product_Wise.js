@@ -219,7 +219,7 @@ export default class Product_Wise extends Component {
                   <Col xs="12" lg="6">
                     <Card>
                       <CardHeader>
-                        <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
+                        <strong>Part ({Title_Key}):  Last 7 Days {Title_Value} Details</strong>
                         <div className="card-actions">
                           <a onClick={this.toggle_last_7_bar}>
                             <i className="fa fa-expand fa-lg" tooltip="Expand"></i>
@@ -237,7 +237,7 @@ export default class Product_Wise extends Component {
                     <Modal isOpen={this.state.last_7_bar} toggle={this.toggle_last_7_bar}
                       className={'modal-lg ' + this.props.className}>
                       <ModalHeader toggle={this.toggle_last_7_bar}>
-                        <strong>Part ({Title_Key}):  {Title_Value} Result Details</strong>
+                        <strong>Part ({Title_Key}):  Last 7 Days {Title_Value} Details</strong>
                       </ModalHeader>
                       <ModalBody>
                         <ReactEcharts

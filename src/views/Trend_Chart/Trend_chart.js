@@ -21,8 +21,10 @@ class Trend_Chart extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1'
+      activeTab: '1',
+      spinner: true
     };
+
   }
 
   toggle(tab) {
@@ -30,6 +32,11 @@ class Trend_Chart extends Component {
       this.setState({
         activeTab: tab
       });
+      setTimeout(() => {
+        this.setState({
+          spinner: false
+        });
+      }, 500);
     }
   }
 
@@ -407,8 +414,8 @@ class Trend_Chart extends Component {
                 </div> */}
                 <span className="pull-right" style={{ marginTop: -35 }}>
                   <b>UCL</b> : Upper Current Limit <br />
-                  <b>LCL</b> : Lower Current Limit <br />
-                  <b>&nbsp;&nbsp;CL</b> : Current Limit
+                  &nbsp;<b>LCL</b> : Lower Current Limit <br />
+                  &nbsp;<b>&nbsp;&nbsp;CL</b> : Current Limit
                 </span>
               </CardHeader>
               <CardBody>
@@ -437,7 +444,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS1CT_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -445,7 +452,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS1WOT_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -453,7 +460,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS2CT_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -464,7 +471,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS2WOT_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -473,7 +480,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS1Diff_Lin_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -481,7 +488,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS1Int_Lin_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -492,7 +499,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={APS2Int_Lin_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -500,7 +507,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={Dual_APS_Corr_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -508,7 +515,7 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={CTE_Return_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
@@ -519,77 +526,79 @@ class Trend_Chart extends Component {
                             <div className="chart-wrapper">
                               <ReactEcharts
                                 option={Power_Sup_Voltage_Chart}
-                                style={{ height: 280, width: 370 }}
+                                style={{ height: 280, width: 'auto' }}
                               />
                             </div>
                           </Col>
                         </Row>
                       </TabPane>
                       <TabPane tabId="2">
-                        <Row>
-                          <Col xs="12" lg="4">
-                            <div className="chart-wrapper" id="chart_1">
-                              <ReactEcharts id="chart_11"
-                                option={IPF_Chart}
-                                style={{ height: 280, width: 370 }}
-                              />
-                            </div>
-                          </Col>
-                          <Col xs="12" lg="4">
-                            <div className="chart-wrapper" id="chart_2">
-                              <ReactEcharts
-                                option={RPF_Chart}
-                                style={{ height: 280, width: 370 }}
-                              />
-                            </div>
-                          </Col>
-                          <Col xs="12" lg="4">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={HYS_Chart}
-                                style={{ height: 280, width: 370 }}
-                              />
-                            </div>
-                          </Col>
-                        </Row>
-                        <br />
-                        <Row>
-                          <Col xs="12" lg="4">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={FPTB_Chart}
-                                style={{ height: 280, width: 370 }}
-                              />
-                            </div>
-                          </Col>
-                          <Col xs="12" lg="4">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={WOTM_Chart}
-                                style={{ height: 280, width: 370 }}
-                              />
-                            </div>
-                          </Col>
-                          <Col xs="12" lg="4">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={CTDB_Chart}
-                                style={{ height: 280, width: 370 }}
-                              />
-                            </div>
-                          </Col>
-                        </Row>
-                        <br />
-                        <Row>
-                          <Col xs="12" lg="4">
-                            <div className="chart-wrapper">
-                              <ReactEcharts
-                                option={WOTDB_Chart}
-                                style={{ height: 280, width: 370 }}
-                              />
-                            </div>
-                          </Col>
-                        </Row>
+                        {this.state.spinner && (<div className="text-center" style={{ height: 190 }}><div className="text-center" style={{ marginTop: 150 }}><i className="fa fa-spinner fa-lg fa-spin fa-3x"></i></div></div>)}
+                        {!this.state.spinner && (<div>
+                          <Row>
+                            <Col xs="12" lg="4">
+                              <div className="chart-wrapper" id="chart_1">
+                                <ReactEcharts id="chart_11"
+                                  option={IPF_Chart}
+                                  style={{ height: 280, width: 'auto' }}
+                                />
+                              </div>
+                            </Col>
+                            <Col xs="12" lg="4">
+                              <div className="chart-wrapper" id="chart_2">
+                                <ReactEcharts
+                                  option={RPF_Chart}
+                                  style={{ height: 280, width: 'auto' }}
+                                />
+                              </div>
+                            </Col>
+                            <Col xs="12" lg="4">
+                              <div className="chart-wrapper">
+                                <ReactEcharts
+                                  option={HYS_Chart}
+                                  style={{ height: 280, width: 'auto' }}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <br />
+                          <Row>
+                            <Col xs="12" lg="4">
+                              <div className="chart-wrapper">
+                                <ReactEcharts
+                                  option={FPTB_Chart}
+                                  style={{ height: 280, width: 'auto' }}
+                                />
+                              </div>
+                            </Col>
+                            <Col xs="12" lg="4">
+                              <div className="chart-wrapper">
+                                <ReactEcharts
+                                  option={WOTM_Chart}
+                                  style={{ height: 280, width: 'auto' }}
+                                />
+                              </div>
+                            </Col>
+                            <Col xs="12" lg="4">
+                              <div className="chart-wrapper">
+                                <ReactEcharts
+                                  option={CTDB_Chart}
+                                  style={{ height: 280, width: 'auto' }}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <br />
+                          <Row>
+                            <Col xs="12" lg="4">
+                              <div className="chart-wrapper">
+                                <ReactEcharts
+                                  option={WOTDB_Chart}
+                                  style={{ height: 280, width: 'auto' }}
+                                />
+                              </div>
+                            </Col>
+                          </Row></div>)}
                       </TabPane>
                     </TabContent>
                   </Col>
