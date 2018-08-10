@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import ReactEcharts from 'echarts-for-react';
 import { browserHistory } from 'react-router';
+import { config } from '../../config';
 import {
   Row,
   Col,
@@ -31,7 +32,7 @@ var data_24_hrs;
 
 function onChartClick(param, echarts) {
   if (param.name == "Fail" || param.seriesName == "Fail") {
-    axios.get('http://192.168.20.26:5000/resultdetails/0')
+    axios.get(config.url+'resultdetails/0')
       .then(function (response) {
         console.log(response.data.data);
         localStorage.setItem("Failure_Trend_Data", JSON.stringify(response.data.data));
@@ -45,12 +46,12 @@ function onChartClick(param, echarts) {
       status_val = 1;
     else if (Overall_Status == "Fail")
       status_val = 0;
-    axios.get('http://192.168.20.26:5000/productwiseCnt/' + status_val)
+    axios.get(config.url+'productwiseCnt/' + status_val)
       .then(function (response) {
         localStorage.setItem("Overall_Product_API_Responce", JSON.stringify(response.data.data));
       })
       .then(function () {
-        axios.get('http://192.168.20.26:5000/datewiseproductresult')
+        axios.get(config.url+'datewiseproductresult')
           .then(function (response) {
             console.log(response);
             localStorage.setItem("Last_7_Days_API_Responce", JSON.stringify(response.data.data));
@@ -73,13 +74,13 @@ function onChartClick(param, echarts) {
       status_val = 1;
     else if (Overall_Status == "Fail")
       status_val = 0;
-    axios.get('http://192.168.20.26:5000/productwiseCnt/' + status_val)
+    axios.get(config.url+'productwiseCnt/' + status_val)
       .then(function (response) {
         console.log(response.data.data);
         localStorage.setItem("Overall_Product_API_Responce", JSON.stringify(response.data.data));
       })
       .then(function () {
-        axios.get('http://192.168.20.26:5000/datewiseproductresult')
+        axios.get(config.url+'datewiseproductresult')
           .then(function (response) {
             console.log(response);
             localStorage.setItem("Last_7_Days_API_Responce", JSON.stringify(response.data.data));
@@ -144,7 +145,7 @@ export default class Historical_Data extends Component {
   onload_24_hrs_chart() {
     if (this.state.mount_data) {
       var vm = this;
-      axios.get('http://192.168.20.26:5000/currDtResultCount')
+      axios.get(config.url+'currDtResultCount')
         .then(function (response) {
           if (response.data.message == 404) {
             vm.setState({
@@ -212,7 +213,7 @@ export default class Historical_Data extends Component {
   }
   onload_overall_chart_data() {
     if (this.state.mount_data) {
-      axios.get('http://192.168.20.26:5000/summary')
+      axios.get(config.url+'summary')
         .then(function (response) {
           var result = response.data.data;
           for (var i = 0; i < result.length; i++) {
@@ -266,7 +267,7 @@ export default class Historical_Data extends Component {
 
   onload_weekly_chart_data() {
     if (this.state.mount_data) {
-      axios.get('http://192.168.20.26:5000/datewiseresult')
+      axios.get(config.url+'datewiseresult')
         .then(function (response) {
           var result = response.data.data;
           for (var i = 0; i < result.length; i++) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Collapsible from 'react-collapsible';
+import { config } from '../../config';
 import {
   Row,
   Col,
@@ -83,7 +84,7 @@ export default class Over_all_status extends Component {
           fail_param: !this.state.fail_param,
         });
       }
-      axios.get('http://192.168.20.26:5000/resultdetails/' + status)
+      axios.get(config.url+'resultdetails/' + status)
         .then(function (response) {
           console.log(response.data.data);
           var fulldata = response.data.data;
@@ -112,7 +113,7 @@ export default class Over_all_status extends Component {
       }
       localStorage.setItem("Selected_Date_4_Trend", param.name);
       localStorage.setItem("Selected_Product_4_Trend", param.seriesName);
-      axios.get('http://192.168.20.26:5000/resultdetails/' + status)
+      axios.get(config.url+'resultdetails/' + status)
         .then(function (response) {
           console.log(response.data.data);
           var fulldata = response.data.data;
