@@ -1,5 +1,5 @@
 export const AUTH_CONFIG = {
   domain: 'wils.auth0.com',
-  clientId: 'DPxoTRJR2dBzhKdJOlbJL_zXvm_Ct9TX',
+  clientId: '8RxgUxMDjhU0xEULNt62r4Nk2kKvcCJW',
   callbackUrl: 'http://localhost:8082/#/dashboard'
 }

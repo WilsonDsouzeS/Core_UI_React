@@ -10,15 +10,5 @@ export default {
       url: '/machines',
       icon: 'icon-speedometer'
     },
-    {
-      name: 'Historical Data',
-      url: '/historical_main',
-      icon: 'icon-puzzle'
-    }/*,
-    {
-      name: 'MQTT-Test',
-      url: '/mqtt_test',
-      icon: 'icon-puzzle'
-    } */
   ]
 };
