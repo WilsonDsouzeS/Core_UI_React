@@ -15,7 +15,7 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
-  Button
+  Button,
 } from 'reactstrap';
 
 
